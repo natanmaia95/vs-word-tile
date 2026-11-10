@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ds8omu6g4wqyo"]
+
+[ext_resource type="Script" uid="uid://ddpydag3dbr1o" path="res://objects/visual_tile.gd" id="1_4ipli"]
+
+[node name="Tile" type="Node2D" unique_id=1520233539]
+script = ExtResource("1_4ipli")
+
+[node name="Panel" type="Panel" parent="." unique_id=251274556]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="LblLetter" type="Label" parent="." unique_id=21483409]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.5, -0.5)
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1

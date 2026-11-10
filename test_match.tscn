@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dxwn3onfsbdnx"]
+
+[ext_resource type="Script" uid="uid://pvqs3irjd6i3" path="res://test_match.gd" id="1_4w0ny"]
+[ext_resource type="Script" uid="uid://b5j70waqhkg5e" path="res://systems/game/scrabble_game.gd" id="1_t6k7a"]
+[ext_resource type="PackedScene" uid="uid://bxtcwcquqn5na" path="res://systems/game/render/board_renderer.tscn" id="2_4ocvv"]
+
+[node name="TestMatch" type="Node" unique_id=423055582 node_paths=PackedStringArray("game_1", "game_2")]
+script = ExtResource("1_4w0ny")
+game_1 = NodePath("HSplitContainer/SubViewportContainer/SubViewport/ScrabbleGame")
+game_2 = NodePath("HSplitContainer/SubViewportContainer2/SubViewport/ScrabbleGame")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=1476420481]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HSplitContainer" unique_id=850003262]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewport" type="SubViewport" parent="HSplitContainer/SubViewportContainer" unique_id=119377432]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="ScrabbleGame" type="Node" parent="HSplitContainer/SubViewportContainer/SubViewport" unique_id=76799372 node_paths=PackedStringArray("visuals")]
+script = ExtResource("1_t6k7a")
+visuals = NodePath("BoardRenderer")
+metadata/_custom_type_script = "uid://b5j70waqhkg5e"
+
+[node name="BoardRenderer" parent="HSplitContainer/SubViewportContainer/SubViewport/ScrabbleGame" unique_id=1581168432 instance=ExtResource("2_4ocvv")]
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="HSplitContainer" unique_id=995174496]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewport" type="SubViewport" parent="HSplitContainer/SubViewportContainer2" unique_id=447323201]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="ScrabbleGame" type="Node" parent="HSplitContainer/SubViewportContainer2/SubViewport" unique_id=37921346 node_paths=PackedStringArray("visuals")]
+script = ExtResource("1_t6k7a")
+visuals = NodePath("BoardRenderer")
+metadata/_custom_type_script = "uid://b5j70waqhkg5e"
+
+[node name="BoardRenderer" parent="HSplitContainer/SubViewportContainer2/SubViewport/ScrabbleGame" unique_id=850955189 instance=ExtResource("2_4ocvv")]

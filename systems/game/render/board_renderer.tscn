@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bxtcwcquqn5na"]
+
+[ext_resource type="Script" uid="uid://bjv6pcuu1n3gh" path="res://systems/game/render/board_renderer.gd" id="1_bepf0"]
+[ext_resource type="Texture2D" uid="uid://c0o1kctp0lxnv" path="res://icon.svg" id="2_1ou8o"]
+[ext_resource type="Script" uid="uid://cdgvjkh2o5oj" path="res://systems/game/render/test_cursor.gd" id="3_bepf0"]
+
+[node name="BoardRenderer" type="Node2D" unique_id=1581168432]
+script = ExtResource("1_bepf0")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=289659679]
+zoom = Vector2(2, 2)
+
+[node name="test_cursor" type="Sprite2D" parent="." unique_id=2055014902]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.2784314)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_1ou8o")
+script = ExtResource("3_bepf0")
