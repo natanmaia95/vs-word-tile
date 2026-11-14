@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://c67aoik4bg8xb"]
+
+[sub_resource type="Shader" id="Shader_rbdp2"]
+code = "shader_type canvas_item;
+uniform float aspect_ratio = 1.;
+uniform float line_thickness:hint_range(0,1,.001) = .75;
+uniform float inner_size = .5;
+uniform float outer_size = 1.;
+uniform float radius = .001;
+//uniform vec4 background:source_color;
+uniform vec4 line_a:source_color;
+uniform vec4 line_b:source_color;
+uniform vec4 line_c:source_color;
+float sdCornerCircle( in vec2 p ) {
+    return length(p-vec2(0.0,-1.0)) - sqrt(2.0);
+}
+float sdRoundBox( in vec2 p, in vec2 b, in vec4 r) {
+    // select corner radius
+    r.xy = (p.x>0.0)?r.xy : r.zw;
+    r.x  = (p.y>0.0)?r.x  : r.y;
+    // box coordinates
+    vec2 q = abs(p)-b+r.x;
+    // distance to sides
+    if( min(q.x,q.y)<0.0 ) return max(q.x,q.y)-r.x;
+    // rotate 45 degrees, offset by r and scale by r*sqrt(0.5) to canonical corner coordinates
+    vec2 uv = vec2( abs(q.x-q.y), q.x+q.y-r.x )/r.x;
+    // undo scale
+    return sdCornerCircle( uv ) * r.x*sqrt(0.5);
+}
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	float line = sdRoundBox((UV-vec2(.5))*vec2(aspect_ratio,1.), vec2(inner_size/2.)*vec2(aspect_ratio,1.), vec4(radius)) * (3./(outer_size/2.-inner_size/2.));
+
+	vec4 line_color = vec4(0);
+	switch(int(floor(line))) {
+		case 0:
+			line_color = line_a;
+			break;
+		case 1:
+			line_color = line_b;
+			break;
+		case 2:
+			line_color = line_c;
+			break;
+	} 
+	
+	//vec3 c = mix(background, line_a, )
+	COLOR = mix(vec4(0), line_color, 1.-step(line_thickness, fract(line)));
+	//COLOR = vec4(fract(line));
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lb2d0"]
+shader = SubResource("Shader_rbdp2")
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/line_thickness = 1.0
+shader_parameter/inner_size = 1.0
+shader_parameter/outer_size = 0.0
+shader_parameter/radius = 0.595
+shader_parameter/line_a = Color(0.92941177, 0.62352943, 0.16470589, 1)
+shader_parameter/line_b = Color(0.8745098, 0.30980393, 0.8039216, 1)
+shader_parameter/line_c = Color(0.56078434, 0.2627451, 0.7764706, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lb2d0"]
+
+[node name="Node2D" type="Node2D" unique_id=1129322034]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=50928507]
+material = SubResource("ShaderMaterial_lb2d0")
+offset_left = 50.0
+offset_top = 8.0
+offset_right = 90.0
+offset_bottom = 43.0
+texture = SubResource("PlaceholderTexture2D_lb2d0")
+stretch_mode = 4
+
+[node name="Panel" type="Panel" parent="." unique_id=393226578]
+offset_right = 40.0
+offset_bottom = 40.0

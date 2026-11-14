@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://xq3x136vosno"]
+
+[ext_resource type="Script" uid="uid://dvvie1la145uy" path="res://tests/mock_tiles.gd" id="1_sqe0u"]
+
+[node name="Control" type="Control" unique_id=116574851]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player" type="CenterContainer" parent="." unique_id=1440366223]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Player" unique_id=1589850527]
+layout_mode = 2
+columns = 9
+script = ExtResource("1_sqe0u")

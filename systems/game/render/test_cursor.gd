@@ -1,7 +1,9 @@
 extends Sprite2D
 
 
-var LETTERS : Array = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split()
+var li:int = 0
+var LETTERS : Array = "WWOABSDAE".split()
+
 
 var game : ScrabbleGame = null
 
@@ -34,7 +36,8 @@ func on_click() -> void:
 
 func place_random_tile(pos:Vector2i) -> void:
 	var tile_data = 0
-	var letter = LETTERS.pick_random()
+	var letter = LETTERS[li]
+	li = (li + 1) % LETTERS.size()
 	tile_data = TD.set_letter(letter, tile_data)
 	if randf() < 0.2: 
 		tile_data = TD.set_evil(true, tile_data)

@@ -1,22 +1,453 @@
 [gd_scene format=3 uid="uid://ds8omu6g4wqyo"]
 
 [ext_resource type="Script" uid="uid://ddpydag3dbr1o" path="res://objects/visual_tile.gd" id="1_4ipli"]
+[ext_resource type="FontFile" uid="uid://bv5tv5405slr1" path="res://fonts/Torque Sense.otf" id="2_1xr65"]
 
-[node name="Tile" type="Node2D" unique_id=1520233539]
+[sub_resource type="Shader" id="Shader_rbdp2"]
+code = "shader_type canvas_item;
+uniform float aspect_ratio = 1.;
+uniform float line_thickness:hint_range(0,1,.001) = .75;
+uniform float inner_size = .5;
+uniform float outer_size = 1.;
+uniform float radius = .001;
+//uniform vec4 background:source_color;
+uniform vec4 line_a:source_color;
+uniform vec4 line_b:source_color;
+uniform vec4 line_c:source_color;
+float sdCornerCircle( in vec2 p ) {
+    return length(p-vec2(0.0,-1.0)) - sqrt(2.0);
+}
+float sdRoundBox( in vec2 p, in vec2 b, in vec4 r) {
+    // select corner radius
+    r.xy = (p.x>0.0)?r.xy : r.zw;
+    r.x  = (p.y>0.0)?r.x  : r.y;
+    // box coordinates
+    vec2 q = abs(p)-b+r.x;
+    // distance to sides
+    if( min(q.x,q.y)<0.0 ) return max(q.x,q.y)-r.x;
+    // rotate 45 degrees, offset by r and scale by r*sqrt(0.5) to canonical corner coordinates
+    vec2 uv = vec2( abs(q.x-q.y), q.x+q.y-r.x )/r.x;
+    // undo scale
+    return sdCornerCircle( uv ) * r.x*sqrt(0.5);
+}
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	float line = sdRoundBox((UV-vec2(.5))*vec2(aspect_ratio,1.), vec2(inner_size/2.)*vec2(aspect_ratio,1.), vec4(radius)) * (3./(outer_size/2.-inner_size/2.));
+
+	vec4 line_color = vec4(0);
+	switch(int(floor(line))) {
+		case 0:
+			line_color = line_a;
+			break;
+		case 1:
+			line_color = line_b;
+			break;
+		case 2:
+			line_color = line_c;
+			break;
+	} 
+	line_color = mix(line_color, line_c, step(3., line));
+	
+	//vec3 c = mix(background, line_a, )
+	COLOR = mix(vec4(0), line_color, 1.-step(line_thickness, fract(line)));
+	//COLOR = vec4(fract(line));
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ipli"]
+resource_local_to_scene = true
+shader = SubResource("Shader_rbdp2")
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/line_thickness = 1.0
+shader_parameter/inner_size = 0.25
+shader_parameter/outer_size = 0.0
+shader_parameter/radius = 0.5
+shader_parameter/line_a = Color(0, 0, 0, 0)
+shader_parameter/line_b = Color(0.8745098, 0.30980393, 0.8039216, 1)
+shader_parameter/line_c = Color(0.11764706, 0.101960786, 0.1254902, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ipli"]
+font = ExtResource("2_1xr65")
+font_size = 18
+font_color = Color(0.9647059, 0.9843137, 0.8509804, 1)
+
+[sub_resource type="Animation" id="Animation_1xr65"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.25]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:material:shader_parameter/line_thickness")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Panel:offset_transform_enabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Panel:offset_transform_position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5u0ay"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.125, 0.125, 0.3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.25, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Panel:material:shader_parameter/line_thickness")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.2000000095, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6, 0.76666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 0), Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5, 0.76666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1), Color(0.9647059, 0.9843137, 0.8509804, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2p2qv"]
+resource_name = "show_drop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.23333333, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.9647059, 0.9843137, 0.8509804, 0), Color(0.9647059, 0.9843137, 0.8509804, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.23333333, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1), Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.36666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.125, 0.3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.25, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel:material:shader_parameter/line_thickness")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.36666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel:offset_transform_enabled")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Panel:offset_transform_position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.93333334, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -16), Vector2(0, -8), Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.33333334, 0.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2p2qv"]
+_data = {
+&"RESET": SubResource("Animation_1xr65"),
+&"show": SubResource("Animation_5u0ay"),
+&"show_drop": SubResource("Animation_2p2qv")
+}
+
+[node name="Tile" type="Control" unique_id=1686074798]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_4ipli")
 
 [node name="Panel" type="Panel" parent="." unique_id=251274556]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+material = SubResource("ShaderMaterial_4ipli")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="LblLetter" type="Label" parent="." unique_id=21483409]
+[node name="LblLetter" type="Label" parent="Panel" unique_id=21483409]
 unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-0.5, -0.5)
+offset_transform_position = Vector2(1, 1)
 text = "A"
+label_settings = SubResource("LabelSettings_4ipli")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2112099576]
+libraries/ = SubResource("AnimationLibrary_2p2qv")

@@ -6,3 +6,4 @@ extends Node
 
 func _ready() -> void:
 	game_1.initialize()
+	game_2.initialize()
