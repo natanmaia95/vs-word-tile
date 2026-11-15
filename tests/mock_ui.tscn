@@ -2,17 +2,13 @@
 
 [ext_resource type="Script" uid="uid://di0rxjrfdro8x" path="res://tests/mock_ui.gd" id="1_s48ir"]
 [ext_resource type="Script" uid="uid://dvvie1la145uy" path="res://tests/mock_tiles.gd" id="1_sqe0u"]
-[ext_resource type="Script" uid="uid://dw6s3n3i8clbx" path="res://systems/game/tile_board.gd" id="2_2co7h"]
+[ext_resource type="Script" uid="uid://b5j70waqhkg5e" path="res://systems/game/scrabble_game.gd" id="2_kx1be"]
 [ext_resource type="PackedScene" uid="uid://ds8omu6g4wqyo" path="res://objects/visual_tile.tscn" id="4_jgpj5"]
 [ext_resource type="Script" uid="uid://ca3xkh0stq2ih" path="res://tests/hand_container.gd" id="4_kx1be"]
 
-[sub_resource type="Resource" id="Resource_3eav7"]
-script = ExtResource("2_2co7h")
-metadata/_custom_type_script = "uid://dw6s3n3i8clbx"
-
-[sub_resource type="Resource" id="Resource_lb2d0"]
-script = ExtResource("2_2co7h")
-metadata/_custom_type_script = "uid://dw6s3n3i8clbx"
+[sub_resource type="Resource" id="Resource_jgpj5"]
+script = ExtResource("2_kx1be")
+metadata/_custom_type_script = "uid://b5j70waqhkg5e"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3eav7"]
 content_margin_left = 8.0
@@ -54,8 +50,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s48ir")
-player = SubResource("Resource_3eav7")
-opponent = SubResource("Resource_lb2d0")
+game = SubResource("Resource_jgpj5")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=276797559]
 layout_mode = 1

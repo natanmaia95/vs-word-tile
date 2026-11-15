@@ -3,7 +3,7 @@ class_name VisualTile extends TextureButton
 @onready var animation_player:AnimationPlayer = find_child("AnimationPlayer")
 
 ## We should make this a getter to pull from game state
-var cursor_letter:String = "A"
+#var cursor_letter:String = " "
 
 var letter : String = " " :
 	set(value):

@@ -24,10 +24,10 @@ func _initialize_board() -> void:
 			var tile:VisualTile = VISUAL_TILE.instantiate()
 			#tile.coord = Vector2i(x,y)
 			add_child(tile)
-			tile.gui_input.connect(func(event:InputEvent) -> void:
-				if event is InputEventMouseButton and event.is_pressed():
-					tile.active = not tile.active
-			)
+			#tile.gui_input.connect(func(event:InputEvent) -> void:
+				#if event is InputEventMouseButton and event.is_pressed():
+					#tile.active = not tile.active
+			#)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
