@@ -12,7 +12,12 @@ var draggable:bool = false
 var swappable:bool = false
 var letter : String = "" :
 	set(value):
+		if active and animation_player:
+			animation_player.play(&"show", -1, -4., true)
+			await animation_player.animation_finished
 		letter = value.capitalize()
+		if active and animation_player:
+			animation_player.play(&"show_drop", -1, 4)
 		%LblLetter.text = letter
 
 var active:bool = false:
@@ -51,8 +56,9 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 		copy.copy(self)
 		copy.draggable = false
 		copy.offset_transform_enabled = true
-		copy.offset_transform_position = -at_position
-		active = false
+		#copy.offset_transform_position = -at_position
+		copy.offset_transform_position_ratio = -Vector2(.5,.5)
+		#active = false
 		set_drag_preview(copy)
 		return self
 	return null
@@ -77,6 +83,8 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	else: # placing tile on inactive board tile
 		data.letter = ""
 		data.active = false
+		draggable = true
+		swappable = true
 		placed.emit(letter)
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
