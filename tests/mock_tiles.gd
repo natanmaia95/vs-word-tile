@@ -18,8 +18,7 @@ func _initialize_board() -> void:
 
 func tile_placed(letter:String, coord:Vector2i) -> void:
 	print("Tile placed at ",coord,": ",letter)
-	# var tile_data:int = ?
-	#board.set_tile_data(coord, )
+	# maybe store this in pending tiles or something like that, until a word is formed?
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

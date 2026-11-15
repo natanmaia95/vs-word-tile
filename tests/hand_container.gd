@@ -8,8 +8,6 @@ func _ready() -> void:
 	game.hand_changed.connect(_update_hand)
 	_update_hand(game.hand)
 
-
-
 func _update_hand(hand:Array[String]) -> void:
 	for i:int in range(get_child_count()):
 		var visual_tile:VisualTile = get_child(i)
