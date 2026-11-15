@@ -1,24 +1,87 @@
 [gd_scene format=3 uid="uid://xq3x136vosno"]
 
+[ext_resource type="Script" uid="uid://di0rxjrfdro8x" path="res://tests/mock_ui.gd" id="1_s48ir"]
 [ext_resource type="Script" uid="uid://dvvie1la145uy" path="res://tests/mock_tiles.gd" id="1_sqe0u"]
+[ext_resource type="Script" uid="uid://dw6s3n3i8clbx" path="res://systems/game/tile_board.gd" id="2_2co7h"]
+[ext_resource type="PackedScene" uid="uid://ds8omu6g4wqyo" path="res://objects/visual_tile.tscn" id="4_jgpj5"]
 
-[node name="Control" type="Control" unique_id=116574851]
+[sub_resource type="Resource" id="Resource_3eav7"]
+script = ExtResource("2_2co7h")
+metadata/_custom_type_script = "uid://dw6s3n3i8clbx"
+
+[sub_resource type="Resource" id="Resource_lb2d0"]
+script = ExtResource("2_2co7h")
+metadata/_custom_type_script = "uid://dw6s3n3i8clbx"
+
+[node name="MockUI" type="Control" unique_id=116574851]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_s48ir")
+player = SubResource("Resource_3eav7")
+opponent = SubResource("Resource_lb2d0")
 
-[node name="Player" type="CenterContainer" parent="." unique_id=1440366223]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=276797559]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="Player" unique_id=1589850527]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1471967543]
 layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Player" type="CenterContainer" parent="HBoxContainer/VBoxContainer" unique_id=1440366223]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer/Player" unique_id=1589850527]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 9
+script = ExtResource("1_sqe0u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1401861399]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Tile" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1686074798 instance=ExtResource("4_jgpj5")]
+layout_mode = 2
+
+[node name="Tile2" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=258376446 instance=ExtResource("4_jgpj5")]
+layout_mode = 2
+
+[node name="Tile3" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1023433767 instance=ExtResource("4_jgpj5")]
+layout_mode = 2
+
+[node name="Tile4" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1172475297 instance=ExtResource("4_jgpj5")]
+layout_mode = 2
+
+[node name="Tile5" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=814415907 instance=ExtResource("4_jgpj5")]
+layout_mode = 2
+
+[node name="Tile6" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=849099653 instance=ExtResource("4_jgpj5")]
+layout_mode = 2
+
+[node name="Tile7" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2028218126 instance=ExtResource("4_jgpj5")]
+layout_mode = 2
+
+[node name="Player2" type="CenterContainer" parent="HBoxContainer" unique_id=394896204]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Player2" unique_id=1005448729]
+propagate_maximum_size = false
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+offset_transform_visual_only = false
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 9
 script = ExtResource("1_sqe0u")

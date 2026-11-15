@@ -68,7 +68,7 @@ shader = SubResource("Shader_rbdp2")
 shader_parameter/aspect_ratio = 1.0
 shader_parameter/line_thickness = 1.0
 shader_parameter/inner_size = 0.25
-shader_parameter/outer_size = 0.0
+shader_parameter/outer_size = -0.14
 shader_parameter/radius = 0.5
 shader_parameter/line_a = Color(0, 0, 0, 0)
 shader_parameter/line_b = Color(0.8745098, 0.30980393, 0.8039216, 1)
@@ -76,7 +76,7 @@ shader_parameter/line_c = Color(0.11764706, 0.101960786, 0.1254902, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4ipli"]
 font = ExtResource("2_1xr65")
-font_size = 18
+font_size = 48
 font_color = Color(0.9647059, 0.9843137, 0.8509804, 1)
 
 [sub_resource type="Animation" id="Animation_1xr65"]
@@ -114,7 +114,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [-0.14]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -201,6 +201,105 @@ tracks/9/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_fdq3c"]
+resource_name = "hover_inactivve"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/line_thickness")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.125, 0.165]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.25, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.14, 0.607]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.7, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 0), Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_5u0ay"]
 resource_name = "show"
 tracks/0/type = "value"
@@ -237,7 +336,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.6]
+"values": [-0.14, 0.6]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -258,7 +357,7 @@ tracks/4/path = NodePath("Panel/LblLetter:self_modulate")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.6, 0.76666665),
+"times": PackedFloat32Array(0.8, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.11764706, 0.101960786, 0.1254902, 0), Color(0.11764706, 0.101960786, 0.1254902, 1)]
@@ -282,7 +381,7 @@ tracks/6/path = NodePath("Panel:material:shader_parameter/line_c")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.5, 0.76666665),
+"times": PackedFloat32Array(0.7, 0.8666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.11764706, 0.101960786, 0.1254902, 1), Color(0.9647059, 0.9843137, 0.8509804, 1)]
@@ -312,7 +411,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.23333333, 0.36666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.8745098, 0.30980393, 0.8039216, 1), Color(0.11764706, 0.101960786, 0.1254902, 1)]
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1), Color(0.9647059, 0.9843137, 0.8509804, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -336,7 +435,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.36666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.125, 0.3]
+"values": [0.125, 0.15]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -348,7 +447,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.36666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.6]
+"values": [0.6, 0.6]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -360,7 +459,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.36666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.25, 1.0]
+"values": [1.0, 1.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -414,14 +513,16 @@ tracks/9/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2p2qv"]
 _data = {
 &"RESET": SubResource("Animation_1xr65"),
+&"hover_inactive": SubResource("Animation_fdq3c"),
 &"show": SubResource("Animation_5u0ay"),
 &"show_drop": SubResource("Animation_2p2qv")
 }
 
 [node name="Tile" type="Control" unique_id=1686074798]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("1_4ipli")
 
 [node name="Panel" type="Panel" parent="." unique_id=251274556]
@@ -432,6 +533,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="LblLetter" type="Label" parent="Panel" unique_id=21483409]
 unique_name_in_owner = true
@@ -443,7 +545,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(1, 1)
+offset_transform_position = Vector2(2.25, 3)
+mouse_filter = 1
 text = "A"
 label_settings = SubResource("LabelSettings_4ipli")
 horizontal_alignment = 1

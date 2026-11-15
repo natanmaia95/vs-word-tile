@@ -79,13 +79,12 @@ shader_parameter/line_c = Color(0.11764706, 0.101960786, 0.1254902, 1)
 script = ExtResource("1_bepf0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=289659679]
-zoom = Vector2(2, 2)
 
 [node name="test_cursor" type="Sprite2D" parent="." unique_id=2055014902]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.2784314)
 material = SubResource("ShaderMaterial_bepf0")
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_1ou8o")
 centered = false
 script = ExtResource("3_bepf0")

@@ -2,7 +2,7 @@ extends Sprite2D
 
 
 var li:int = 0
-var LETTERS : Array = "WWOABSDAE".split()
+var LETTERS : Array = "ABCDEFGHIJKLMNOPQRSTUV".split()
 
 
 var game : ScrabbleGame = null

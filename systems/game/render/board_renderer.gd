@@ -3,10 +3,10 @@ extends Node2D
 
 
 static func grid_to_local(pos:Vector2i) -> Vector2:
-	return Vector2(pos * 32)
+	return Vector2(pos * 64)
 
 static func local_to_grid(pos:Vector2) -> Vector2i:
-	return (pos / 32.0).floor()
+	return (pos / 64.0).floor()
 
 
 
@@ -72,14 +72,13 @@ func animate_tile_placed(pos:Vector2i, tile_data:int) -> void:
 func animate_tile_removed(pos:Vector2i, _tile_data:int) -> void:
 	var tile = tile_nodes.get(pos) as VisualTile
 	tile_nodes.erase(pos)
-	tile.remove()
-	# animate exit
-	#var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-	#tween.set_parallel()
-	#tween.tween_property(tile, "scale", Vector2.ONE*2, 0.5)
-	#tween.tween_property(tile, "modulate:a", 0, 0.5)
-	#tween.set_parallel(false)
-	#tween.tween_callback(tile.queue_free)
+	 #animate exit
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	tween.set_parallel()
+	tween.tween_property(tile, "scale", Vector2.ONE*2, 0.5)
+	tween.tween_property(tile, "modulate:a", 0, 0.5)
+	tween.set_parallel(false)
+	tween.tween_callback(tile.queue_free)
 
 
 func animate_tile_changed(pos:Vector2i, tile_data:int) -> void:
