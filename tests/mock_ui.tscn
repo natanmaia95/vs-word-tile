@@ -71,6 +71,7 @@ size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/Player" unique_id=1730240069]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_3eav7")
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer/Player/PanelContainer" unique_id=1589850527]
@@ -82,6 +83,7 @@ script = ExtResource("1_sqe0u")
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=743073388]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_jgpj5")
 
 [node name="HandContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=1401861399]
