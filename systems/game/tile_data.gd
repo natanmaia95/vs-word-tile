@@ -96,11 +96,6 @@ class Abstraction extends RefCounted:
 		evil = TD.get_evil(data)
 		type = TD.get_type(data)
 	
-	func get_points_value() -> int:
-		var points = OfficialEnglishDistribution.POINT_VALUES.get(letter)
-		points *= TD.get_multiplier_for_type(type)
-		if evil: points *= -1
-		return points
 	
 	func to_int() -> int:
 		data = TD.set_evil(evil, data)

@@ -10,3 +10,4 @@ var distro : Distribution
 
 func initialize() -> void:
 	board = TileBoard.new()
+	bag.game = self
