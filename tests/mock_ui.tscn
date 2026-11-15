@@ -13,6 +13,38 @@ metadata/_custom_type_script = "uid://dw6s3n3i8clbx"
 script = ExtResource("2_2co7h")
 metadata/_custom_type_script = "uid://dw6s3n3i8clbx"
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3eav7"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.11764706, 0.101960786, 0.1254902, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.3647059, 0.31764707, 0.84313726, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jgpj5"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.11764706, 0.101960786, 0.1254902, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.2901961, 0.8901961, 0.7490196, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
 [node name="MockUI" type="Control" unique_id=116574851]
 layout_mode = 3
 anchors_preset = 15
@@ -41,36 +73,44 @@ theme_override_constants/separation = 32
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer/Player" unique_id=1589850527]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/Player" unique_id=1730240069]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3eav7")
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer/Player/PanelContainer" unique_id=1589850527]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 9
 script = ExtResource("1_sqe0u")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1401861399]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=743073388]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jgpj5")
+
+[node name="HandContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=1401861399]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Tile" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1686074798 instance=ExtResource("4_jgpj5")]
+[node name="Tile" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=1686074798 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="Tile2" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=258376446 instance=ExtResource("4_jgpj5")]
+[node name="Tile2" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=258376446 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="Tile3" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1023433767 instance=ExtResource("4_jgpj5")]
+[node name="Tile3" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=1023433767 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="Tile4" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1172475297 instance=ExtResource("4_jgpj5")]
+[node name="Tile4" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=1172475297 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="Tile5" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=814415907 instance=ExtResource("4_jgpj5")]
+[node name="Tile5" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=814415907 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="Tile6" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=849099653 instance=ExtResource("4_jgpj5")]
+[node name="Tile6" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=849099653 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="Tile7" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2028218126 instance=ExtResource("4_jgpj5")]
+[node name="Tile7" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=2028218126 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
 [node name="Player2" type="CenterContainer" parent="HBoxContainer" unique_id=394896204]

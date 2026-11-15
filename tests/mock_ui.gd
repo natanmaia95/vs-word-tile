@@ -2,7 +2,7 @@ extends Control
 
 @export var player:TileBoard
 @export var opponent:TileBoard
-@onready var player_board:GridContainer = $HBoxContainer/VBoxContainer/Player/GridContainer
+@onready var player_board:GridContainer = $HBoxContainer/VBoxContainer/Player/PanelContainer/GridContainer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_board.board = player
