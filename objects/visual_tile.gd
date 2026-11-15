@@ -1,4 +1,4 @@
-class_name VisualTile extends Control
+class_name VisualTile extends TextureButton
 
 @onready var animation_player:AnimationPlayer = find_child("AnimationPlayer")
 
