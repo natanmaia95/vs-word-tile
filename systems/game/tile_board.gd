@@ -5,16 +5,7 @@ signal updated_tiles(positions:Array[Vector2i])
 
 @export var _data : Dictionary[Vector2i, int] = {}
 
-# tiles that need updates
-var dirty_tiles : Array[Vector2i] = []
 
-
-
-
-func tick_render(_delta:float) -> void:
-	if not dirty_tiles.is_empty():
-		updated_tiles.emit(dirty_tiles.duplicate())
-		dirty_tiles = []
 
 
 
@@ -27,7 +18,7 @@ func set_tile_data(pos:Vector2i, tile_data:int):
 		_data.erase(pos)
 	else:
 		_data[pos] = tile_data
-	dirty_tiles.append(pos)
+	updated_tiles.emit([pos])
 
 
 func compare_data_with(other:Dictionary[Vector2i, int]) -> Array[Vector2i]:
@@ -48,7 +39,7 @@ func merge_data_with(other:Dictionary[Vector2i, int]) -> void:
 			_data.erase(pos)
 		else:
 			_data[pos] = other[pos]
-	dirty_tiles = _merge_arrays(dirty_tiles, changes)
+	updated_tiles.emit(changes)
 
 
 

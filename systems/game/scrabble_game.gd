@@ -1,19 +1,12 @@
 class_name ScrabbleGame
-extends Node
+extends Resource
 
 
-
+var hand : Array[String] = []
+var bag : TileBag
 var board : TileBoard
-
-@export var visuals : Node = null
+var distro : Distribution
 
 
 func initialize() -> void:
 	board = TileBoard.new()
-	
-	if visuals:
-		visuals.initialize(self)
-
-
-func _process(delta: float) -> void:
-	if board: board.tick_render(delta)

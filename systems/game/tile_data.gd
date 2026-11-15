@@ -15,20 +15,12 @@ const MASK_TYPE   = 0b0000011100000000
 const MASK_EVIL   = 0b1000000000000000
 const MASK_16BIT = 0xFFFF
 
-const LETTER_POINT_VALUES : Dictionary[String, int] = {
-	"A": 1, "B": 3, "C": 3, "D": 2, "E": 1, 
-	"F": 4, "G": 2, "H": 4, "I": 1, "J": 8, 
-	"K": 5, "L": 1, "M": 3, "N": 1, "O": 1, 
-	"P": 3, "Q": 10, "R": 1, "S": 1, "T": 1, 
-	"U": 1, "V": 4, "W": 4, "X": 8, "Y": 4, "Z": 10
-}
 
 
 
 
-static func points_for_letter(letter:String) -> int:
-	letter = letter[0].capitalize()
-	return LETTER_POINT_VALUES.get(letter, 0)
+
+
 
 
 
@@ -105,7 +97,7 @@ class Abstraction extends RefCounted:
 		type = TD.get_type(data)
 	
 	func get_points_value() -> int:
-		var points = TD.points_for_letter(letter)
+		var points = OfficialEnglishDistribution.POINT_VALUES.get(letter)
 		points *= TD.get_multiplier_for_type(type)
 		if evil: points *= -1
 		return points

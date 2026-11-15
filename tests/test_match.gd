@@ -5,5 +5,5 @@ extends Node
 @export var game_2 : ScrabbleGame
 
 func _ready() -> void:
-	game_1.initialize()
-	game_2.initialize()
+	#game_1.initialize()
+	pass
