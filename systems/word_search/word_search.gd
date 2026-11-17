@@ -9,8 +9,8 @@ extends Object
 static func find_matches_for_line(
 		spaces:Array, hand:Array, words:String) -> Array[RegExMatch]:
 	 
-	var hand_set : Array[String] = WordSearch.deduplicate_array(hand)
-	hand_set = WordSearch.capitalize_array(hand_set)
+	var hand_set : Array = WordSearch.deduplicate_array(hand)
+	#hand_set = WordSearch.capitalize_array(hand_set)
 	var hand_collection = "[%s]" % "".join(hand_set) # [AEIOU]
 	
 	# match whole line as one word; include all tiles in line
@@ -19,7 +19,7 @@ static func find_matches_for_line(
 	var space_count = 0
 	var past_a_letter = false
 	for i in range(spaces.size() + 1):
-		var letter = "END" if i == spaces.size() else spaces[i]
+		var letter : String = "END" if i == spaces.size() else spaces[i]
 		if letter == " ":
 			space_count += 1
 			continue
@@ -32,11 +32,11 @@ static func find_matches_for_line(
 			space_count = 0
 		if letter == "END": 
 			break
-		regex_recipe += letter
+		regex_recipe += letter.to_lower()
 		past_a_letter = true 
 	
 	regex_recipe = "\\b" + regex_recipe + "\\b" # catch a whole word via boundaries
-	
+	print_debug(regex_recipe)
 	var regex = RegEx.create_from_string(regex_recipe)
 	var matches : Array[RegExMatch] = regex.search_all(words)
 	return matches
