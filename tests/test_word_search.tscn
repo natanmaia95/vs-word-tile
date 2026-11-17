@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bvg86qjpwdrrg"]
+
+[ext_resource type="Script" uid="uid://dfiqesncp6jkt" path="res://tests/test_word_search.gd" id="1_kxm64"]
+
+[node name="TestWordSearch" type="Node2D" unique_id=1161171667]
+script = ExtResource("1_kxm64")
