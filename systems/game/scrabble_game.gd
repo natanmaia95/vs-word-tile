@@ -16,9 +16,9 @@ func initialize() -> void:
 	draw_hand_tiles()
 	hand_changed.emit(hand)
 
-func remove_hand_tiles(letters:Array[String]) -> void:
-	for letter in letters:
-		hand.erase(letter)
+func remove_hand_tiles(datas:Array[int]) -> void:
+	for data in datas:
+		hand.erase(data)
 	hand_changed.emit(hand)
 
 func draw_hand_tiles(hand_size:int = 7) -> void:
@@ -41,8 +41,10 @@ func player_place_tile(pos:Vector2i, tile_data:int) -> bool: # True if all tiles
 	# Submit the tiles if we're all passed!
 	if not failed_check:
 		print("Submitting tiles!")
+		remove_hand_tiles(temporary_tiles.values())
 		for coord:Vector2i in temporary_tiles.keys():
 			board.set_tile_data(coord, TD.set_temporary(false, temporary_tiles[coord]))
+		draw_hand_tiles()
 	return true
 
 func player_remove_tile(pos:Vector2i) -> void:

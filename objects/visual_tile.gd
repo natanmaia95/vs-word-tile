@@ -12,9 +12,10 @@ signal placed(tile_data:int)
 @onready var animation_tree:AnimationTree = find_child("AnimationTree")
 var data:int = 0:
 	set(new):
+		var old:int = data
 		data = new
 		_update_display()
-		if TD.is_empty(data):
+		if old != new and TD.is_empty(data):
 			removed.emit()
 
 func _ready() -> void:
