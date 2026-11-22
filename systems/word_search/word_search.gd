@@ -12,6 +12,7 @@ static func find_matches_for_line(
 	var hand_set : Array = WordSearch.deduplicate_array(hand)
 	#hand_set = WordSearch.capitalize_array(hand_set)
 	var hand_collection = "[%s]" % "".join(hand_set) # [AEIOU]
+	hand_collection = hand_collection.to_lower()
 	
 	# match whole line as one word; include all tiles in line
 	# any number n of empty spaces can match into [hand]{0, n}
@@ -43,6 +44,19 @@ static func find_matches_for_line(
 
 
 
+static func find_words_in_string(string:String, words_list_text:String):
+	var word_candidates : Array = WordSearch.manual_split_string(string)
+	var results : Array = []
+	for item in word_candidates:
+		var word : String = item[0]
+		var regex = RegEx.create_from_string("(?i)\\b%s\\b" % word)
+		var matches : Array[RegExMatch] = regex.search_all(words_list_text)
+		for m in matches:
+			var match_str : String = m.get_string()
+			if not match_str.is_empty(): 
+				results.append([match_str, item[1]])
+	return results
+
 
 
 static func capitalize_array(arr:Array[String]) -> Array[String]:
@@ -56,3 +70,23 @@ static func deduplicate_array(arr:Array) -> Array:
 	for item in arr:
 		d[item] = 1
 	return d.keys()
+
+## Array of items in the shape of [substring, start_index]
+static func manual_split_string(string:String) -> Array:
+	var words = []
+	var last_letter := " "
+	var last_word := ""
+	var word_start = -1
+	for i in range(string.length() + 1):
+		var letter = " "
+		if i != string.length(): letter = string[i]
+		if letter != "":
+			if last_letter == " ": # word start
+				word_start = i
+			last_word += letter
+		if letter == " ":
+			if last_letter != " ": # word end
+				words.append([last_word, word_start])
+			last_word = ""
+		last_letter = letter
+	return words

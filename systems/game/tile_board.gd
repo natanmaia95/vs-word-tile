@@ -3,7 +3,10 @@ extends Resource
 
 signal updated_tiles(positions:Array[Vector2i])
 
+@export var size : int = 9 ## do we want to change this to width x height vector2i?
+
 @export var _data : Dictionary[Vector2i, int] = {}
+
 
 
 
@@ -12,13 +15,35 @@ signal updated_tiles(positions:Array[Vector2i])
 func get_tile_data(pos:Vector2i) -> int:
 	return _data.get(pos, 0)
 
+func get_letter_at(pos:Vector2i) -> String:
+	var tile_data := get_tile_data(pos)
+	if tile_data == 0: return " "
+	return TD.get_letter(tile_data)
 
 func set_tile_data(pos:Vector2i, tile_data:int):
-	if tile_data == 0:
-		_data.erase(pos)
-	else:
-		_data[pos] = tile_data
-	updated_tiles.emit([pos])
+	_set_tiles([[pos, tile_data]])
+
+## Receives an array of arrays: [pos, tile]
+func set_tiles_bulk(list:Array[Array]):
+	_set_tiles(list)
+
+## Receives an array of arrays: [pos, tile]
+func _set_tiles(list:Array[Array]):
+	var changed_positions : Array[Vector2i] = []
+	for item in list:
+		var pos : Vector2i = item[0]
+		var tile_data : int = item[1]
+		changed_positions.append(pos)
+		if tile_data == 0:
+			_data.erase(pos)
+		else:
+			_data[pos] = tile_data
+	updated_tiles.emit(changed_positions)
+
+
+
+
+
 
 
 func compare_data_with(other:Dictionary[Vector2i, int]) -> Array[Vector2i]:

@@ -39,6 +39,7 @@ static func get_type(tile:int) -> Type:
 
 
 static func get_letter(tile:int) -> String:
+	if tile == 0: return " "
 	var letter_zone = (tile & MASK_LETTER) # 8 bits
 	return char(letter_zone + 64).capitalize()
 
