@@ -16,8 +16,10 @@ func _initialize_board() -> void:
 			add_child(tile)
 			tile.placed.connect(tile_placed.bind(Vector2i(x,y)))
 
-func tile_placed(letter:String, coord:Vector2i) -> void:
-	print("Tile placed at ",coord,": ",letter)
+func tile_placed(data:int, coord:Vector2i) -> void:
+	print("Tile placed (temporarily) at ",coord,": ",data)
+	#player_place_tile()
+	#_check_for_new_word(pos)
 	# maybe store this in pending tiles or something like that, until a word is formed?
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -13,6 +13,9 @@ func populate(distro:Distribution) -> void:
 		for _i in range(distro.letter_amounts.get(letter)):
 			_tiles.append(letter)
 
-func get_tile() -> String:
+func get_tile() -> int:
 	# replace this with weighted stuff or whatever eventually
-	return _tiles.pick_random()
+	var data:int = 0
+	data = TD.set_letter(_tiles.pick_random(), data)
+	print("drew ", data)
+	return data

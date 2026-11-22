@@ -1,8 +1,8 @@
 class_name ScrabbleGame
 extends Resource
-signal hand_changed(new_hand:Array[String])
+signal hand_changed(new_hand:Array[int])
 
-var hand : Array[String] = []
+var hand : Array[int] = []
 var bag : TileBag
 var board : TileBoard
 var distro : Distribution
@@ -25,7 +25,6 @@ func draw_hand_tiles(hand_size:int = 7) -> void:
 	for i:int in range(hand_size):
 		hand.append(bag.get_tile())
 	hand_changed.emit(hand)
-	bag.game = self
 
 
 
@@ -39,11 +38,13 @@ func player_place_tile(pos:Vector2i, tile_data:int) -> bool:
 
 
 func _check_for_new_word(pos:Vector2i):
+	print("Called checking for new ord?")
 	var hor_list : Array[String] = []
 	var ver_list : Array[String] = []
 	for i in range(board.size):
 		hor_list.append(board.get_letter_at(Vector2i(i, pos.y)))
 		ver_list.append(board.get_letter_at(Vector2i(pos.x, i)))
+	print(hor_list,ver_list)
 	var hor_after := "".join(hor_list)
 	var ver_after := "".join(ver_list)
 	hor_list[pos.x] = " "

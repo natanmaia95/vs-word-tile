@@ -3,18 +3,21 @@ class_name VisualTile extends TextureButton
 const VISUAL_TILE = preload("uid://ds8omu6g4wqyo")
 
 
-signal placed(tile:String)
+signal placed(tile_data:int)
 
-
-#@onready var animation_player:AnimationPlayer = find_child("AnimationPlayer")
 @onready var animation_tree:AnimationTree = find_child("AnimationTree")
+var data:int = 0:
+	set(new):
+		data = new
+		letter = TD.get_letter(data)
+		print("letter set to ", letter)
+		
 
 var draggable:bool = false
 var swappable:bool = false
-var letter : String = "" :
+var letter : String = "":
 	set(value):
-		letter = value.capitalize()
-		%LblLetter.text = letter
+		%LblLetter.text = value.capitalize()
 
 var active:bool = false:
 	set(value):
@@ -29,10 +32,10 @@ func _ready() -> void:
 func hover(on:bool) -> void:
 	animation_tree.hover = on
 
-func _get_drag_data(at_position: Vector2) -> Variant:
-	if draggable and letter.length() > 0:
+func _get_drag_data(_at_position: Vector2) -> Variant:
+	if draggable and data > 0:
 		var copy:VisualTile = VISUAL_TILE.instantiate()
-		copy.copy(self)
+		copy.data = data
 		copy.draggable = false
 		copy.offset_transform_enabled = true
 		#copy.offset_transform_position = -at_position
@@ -42,33 +45,27 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 		return self
 	return null
 
-func copy(tile:VisualTile) -> void:
-	letter = tile.letter
-	active = tile.active
 
-func _drop_data(_at_position: Vector2, data: Variant) -> void:
+func _drop_data(_at_position: Vector2, drop_data: Variant) -> void:
 	var has_letter:bool = letter.length()
-	print("Dropping ",data.letter," onto me ", data.active);
-	var old_letter:String = letter
+	var old_data:int = data
 	var old_active:bool = active
-	letter = data.letter
+	data = drop_data.data
 	active = true
-	if data.swappable and swappable: # tile in hand, swappable
-		data.letter = old_letter
-		data.active = old_active
+	if drop_data.swappable and swappable: # tile in hand, swappable
+		drop_data.data = old_data
+		drop_data.active = old_active
 	elif has_letter and active: # tile on board already and is active
-		letter = old_letter
-		data.active = true
+		data = old_data
+		drop_data.active = true
 	else: # placing tile on inactive board tile
-		data.letter = ""
-		data.active = false
+		drop_data.data = 0
+		drop_data.active = false
 		draggable = true
 		swappable = true
-		placed.emit(letter)
+		placed.emit(data)
 
-func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
-	if not data is VisualTile:
+func _can_drop_data(_at_position: Vector2, drop_data: Variant) -> bool:
+	if not drop_data is VisualTile:
 		return false
 	return true
-	#var has_letter:bool = letter.length()
-	#return not has_letter or (has_letter and swappable)

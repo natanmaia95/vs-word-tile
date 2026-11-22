@@ -16,15 +16,6 @@ const MASK_EVIL   = 0b1000000000000000
 const MASK_16BIT = 0xFFFF
 
 
-
-
-
-
-
-
-
-
-
 static func is_empty(tile:int) -> bool:
 	return tile == 0
 
@@ -50,8 +41,6 @@ static func get_multiplier_for_type(type) -> int:
 		Type.DOUBLE: return 2
 		Type.TRIPLE: return 3
 	return 1
-
-
 
 
 static func set_evil(evil:bool, tile:int) -> int:
