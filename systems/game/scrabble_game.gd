@@ -36,24 +36,53 @@ func player_place_tile(pos:Vector2i, tile_data:int) -> bool:
 	return true
 
 
+func _connected_tiles(from_coord:Vector2i, x_axis:bool) -> Dictionary[Vector2i, int]:
+	var tiles:Dictionary[Vector2i, int]
+	for i in range(board.size):
+		var coord:Vector2i = from_coord + (Vector2i.RIGHT if x_axis else Vector2i.DOWN) * i
+		var data:int = board.get_tile_data(coord)
+		if TD.is_empty(data):
+			break
+		tiles[coord] = data
+	return tiles 
+
+func _earliest_filled_tile(from_coord:Vector2i, x_axis:bool) -> Vector2i:
+	if TD.is_empty(board.get_tile_data(from_coord)):
+		printerr("Requested earliest filled tile from an empty coord")
+		return from_coord
+	for i in range(board.size):
+		var coord:Vector2i = from_coord + (Vector2i.LEFT if x_axis else Vector2i.UP) * i
+		var data:int = board.get_tile_data(coord)
+		if TD.is_empty(data):
+			return coord + (Vector2i.RIGHT if x_axis else Vector2i.DOWN)
+	return from_coord
+
+func _coord_range(coords:Array[Vector2i], x_axis:bool) -> Array[int]:
+	var minimum:int = coords[0].x if x_axis else coords[0].y
+	var maximum:int = coords[0].x if x_axis else coords[0].y
+	if coords.size() < 2:
+		return [minimum,maximum]
+	for i:int in range(coords.size()):
+		minimum = min(minimum, coords[i].x if x_axis else coords[i].y)
+		maximum = max(maximum, coords[i].x if x_axis else coords[i].y)
+	return [minimum,maximum]
+
+func _get_letters(from_coord:Vector2i, data:Dictionary[Vector2i, int], x_axis:bool) -> String:
+	var ranges:Array[int] = _coord_range(data.keys(), x_axis)
+	var letters:String = ""
+	for i:int in range(ranges[0],ranges[1]+1):
+		var coord:Vector2i = Vector2i(i, from_coord.y) if x_axis else Vector2i(from_coord.x, i)
+		letters += TD.get_letter(data[coord])
+	return letters
 
 func _check_for_new_word(pos:Vector2i):
-	var hor_list : Array[String] = []
-	var ver_list : Array[String] = []
-	for i in range(board.size):
-		hor_list.append(board.get_letter_at(Vector2i(i, pos.y)))
-		ver_list.append(board.get_letter_at(Vector2i(pos.x, i)))
-	print(hor_list,ver_list)
-	var hor_after := "".join(hor_list)
-	var ver_after := "".join(ver_list)
-	hor_list[pos.x] = " "
-	ver_list[pos.y] = " "
-	var hor_before := "".join(hor_list)
-	var ver_before := "".join(ver_list)
+	var horizontal_data:Dictionary[Vector2i, int] = _connected_tiles(_earliest_filled_tile(pos, true), true)
+	var vertical_data:Dictionary[Vector2i, int] = _connected_tiles(_earliest_filled_tile(pos, false), false)
 	
-	var words_before = WordSearch.find_words_in_string(hor_before, distro.word_list)
-	words_before.append_array(WordSearch.find_words_in_string(ver_before, distro.word_list))
-	var words_after = WordSearch.find_words_in_string(hor_after, distro.word_list)
-	words_after.append_array(WordSearch.find_words_in_string(ver_after, distro.word_list))
+	var horizontal_letters = _get_letters(pos, horizontal_data, true)
+	var vertical_letters = _get_letters(pos, vertical_data, false)
+
+	var horizontal_words = WordSearch.find_words_in_string(horizontal_letters, distro.word_list)
+	var vertical_words = WordSearch.find_words_in_string(horizontal_letters, distro.word_list)
 	
-	# TODO: compare before and after lists
+	print(horizontal_words, vertical_words)

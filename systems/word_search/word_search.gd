@@ -44,9 +44,9 @@ static func find_matches_for_line(
 
 
 
-static func find_words_in_string(string:String, words_list_text:String):
+static func find_words_in_string(string:String, words_list_text:String) -> Array[String]:
 	var word_candidates : Array = WordSearch.manual_split_string(string)
-	var results : Array = []
+	var results : Array[String] = []
 	for item in word_candidates:
 		var word : String = item[0]
 		var regex = RegEx.create_from_string("(?i)\\b%s\\b" % word)
