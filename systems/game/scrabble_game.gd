@@ -30,7 +30,7 @@ func draw_hand_tiles(hand_size:int = 7) -> void:
 
 
 func player_place_tile(pos:Vector2i, tile_data:int) -> bool:
-	if board.get_tile_data(pos) == 0: return false
+	if board.get_tile_data(pos) != 0: return false
 	board.set_tile_data(pos, tile_data)
 	_check_for_new_word(pos) #check this row and column for words *including this position*
 	return true
@@ -38,7 +38,6 @@ func player_place_tile(pos:Vector2i, tile_data:int) -> bool:
 
 
 func _check_for_new_word(pos:Vector2i):
-	print("Called checking for new ord?")
 	var hor_list : Array[String] = []
 	var ver_list : Array[String] = []
 	for i in range(board.size):

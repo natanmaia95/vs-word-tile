@@ -1,13 +1,13 @@
 extends GridContainer
 const VISUAL_TILE = preload("uid://ds8omu6g4wqyo")
 
-var board:TileBoard:
+var game:ScrabbleGame:
 	set(new):
-		board = new
+		game = new
 		_initialize_board()
 	
 func _initialize_board() -> void:
-	if not is_node_ready() or not board:
+	if not is_node_ready() or not game:
 		return
 	
 	for y:int in range(columns):
@@ -18,9 +18,7 @@ func _initialize_board() -> void:
 
 func tile_placed(data:int, coord:Vector2i) -> void:
 	print("Tile placed (temporarily) at ",coord,": ",data)
-	#player_place_tile()
-	#_check_for_new_word(pos)
-	# maybe store this in pending tiles or something like that, until a word is formed?
+	game.player_place_tile(coord, data)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

@@ -10,7 +10,6 @@ var data:int = 0:
 	set(new):
 		data = new
 		letter = TD.get_letter(data)
-		print("letter set to ", letter)
 		
 
 var draggable:bool = false
