@@ -124,9 +124,246 @@ tracks/9/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Panel/LblLetter:label_settings:font_color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7vp1w"]
+resource_name = "border_size"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/line_thickness")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.125, 0.165]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.25, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.14, 0.607]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.8333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_odmu4"]
+resource_name = "color_placed"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/LblLetter:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1), Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1ix5a"]
+resource_name = "state_inactive"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/line_thickness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.25]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.15]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.125]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_fdq3c"]
-resource_name = "hover_inactivve"
+resource_name = "state_inactive_hover"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -218,7 +455,94 @@ tracks/7/path = NodePath("Panel/LblLetter:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0.7, 1),
+"times": PackedFloat32Array(0.03333336),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l0nwh"]
+resource_name = "placed"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.03333336),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.03333336),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.125]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.15, 0.6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.25, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6666667, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.8745098, 0.30980393, 0.8039216, 0), Color(0.8745098, 0.30980393, 0.8039216, 1)]
@@ -311,8 +635,95 @@ tracks/6/keys = {
 "values": [Color(0.11764706, 0.101960786, 0.1254902, 1), Color(0.9647059, 0.9843137, 0.8509804, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_2c5of"]
+resource_name = "state_submitted"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9647059, 0.9843137, 0.8509804, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9647059, 0.9843137, 0.8509804, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.15000000000000002]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_2p2qv"]
-resource_name = "show_drop"
+resource_name = "submitted"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -437,9 +848,14 @@ tracks/9/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2p2qv"]
 _data = {
 &"RESET": SubResource("Animation_1xr65"),
-&"hover_inactive": SubResource("Animation_fdq3c"),
+&"border_size": SubResource("Animation_7vp1w"),
+&"color_placed": SubResource("Animation_odmu4"),
+&"inactive": SubResource("Animation_1ix5a"),
+&"inactive_hover": SubResource("Animation_fdq3c"),
+&"placed": SubResource("Animation_l0nwh"),
 &"show": SubResource("Animation_5u0ay"),
-&"show_drop": SubResource("Animation_2p2qv")
+&"state_submitted": SubResource("Animation_2c5of"),
+&"submitted": SubResource("Animation_2p2qv")
 }
 
 [sub_resource type="Shader" id="Shader_rbdp2"]
@@ -516,7 +932,152 @@ shader_parameter/line_c = Color(0.11764706, 0.101960786, 0.1254902, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_4ipli"]
 font = ExtResource("2_1xr65")
 font_size = 48
-font_color = Color(0.9647059, 0.9843137, 0.8509804, 1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2p2qv"]
+animation = &"inactive_hover"
+play_mode = 1
+use_custom_timeline = true
+timeline_length = 0.3
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5u0ay"]
+animation = &"inactive_hover"
+use_custom_timeline = true
+timeline_length = 0.15
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1xr65"]
+animation = &"placed"
+use_custom_timeline = true
+timeline_length = 0.3
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fdq3c"]
+animation = &"submitted"
+use_custom_timeline = true
+timeline_length = 0.5
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1ix5a"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "not hover"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1xr65"]
+advance_mode = 2
+advance_expression = "hover"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5u0ay"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2p2qv"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+advance_expression = "submitted"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fdq3c"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+advance_expression = "not submitted and not hover and not placed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l0nwh"]
+switch_mode = 1
+advance_mode = 2
+advance_expression = "submitted"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2c5of"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "not submitted and hover"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7vp1w"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_odmu4"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "not placed and not hover"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3rx8v"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "submitted"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2tef6"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_expression = "not submitted and placed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_loj2r"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placed
+"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r6wtu"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_expression = "not placed and hover"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1xr65"]
+states/Start/position = Vector2(543, -33)
+states/inactive/node = SubResource("AnimationNodeAnimation_2p2qv")
+states/inactive/position = Vector2(543, 148)
+states/inactive_hover/node = SubResource("AnimationNodeAnimation_5u0ay")
+states/inactive_hover/position = Vector2(328, 63)
+states/placed/node = SubResource("AnimationNodeAnimation_1xr65")
+states/placed/position = Vector2(721, 63)
+states/submitted/node = SubResource("AnimationNodeAnimation_fdq3c")
+states/submitted/position = Vector2(543, 276)
+transitions = ["inactive_hover", "inactive", SubResource("AnimationNodeStateMachineTransition_1ix5a"), "inactive", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_1xr65"), "Start", "inactive", SubResource("AnimationNodeStateMachineTransition_5u0ay"), "inactive", "submitted", SubResource("AnimationNodeStateMachineTransition_2p2qv"), "submitted", "inactive", SubResource("AnimationNodeStateMachineTransition_fdq3c"), "inactive_hover", "submitted", SubResource("AnimationNodeStateMachineTransition_l0nwh"), "submitted", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_2c5of"), "inactive", "placed", SubResource("AnimationNodeStateMachineTransition_7vp1w"), "placed", "inactive", SubResource("AnimationNodeStateMachineTransition_odmu4"), "placed", "submitted", SubResource("AnimationNodeStateMachineTransition_3rx8v"), "submitted", "placed", SubResource("AnimationNodeStateMachineTransition_2tef6"), "inactive_hover", "placed", SubResource("AnimationNodeStateMachineTransition_loj2r"), "placed", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_r6wtu")]
+graph_offset = Vector2(78, -73)
+
+[sub_resource type="GDScript" id="GDScript_2p2qv"]
+script/source = "extends AnimationTree
+@export var hover:bool = false
+@export var placed:bool = false
+@export var submitted:bool = false
+"
+
+[sub_resource type="GDScript" id="GDScript_3eav7"]
+script/source = "extends Node
+
+# I just want a place to put all this
+enum BorderStyle {DOT, SQUARE}
+var border_style:BorderStyle = BorderStyle.DOT
+var border_color:Color
+var background_color:Color
+var letter_color:Color
+var display_letter:bool
+
+@onready var material:ShaderMaterial = get_parent().find_child(\"Panel\").material as ShaderMaterial
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	var current_radius:float = material.get_shader_parameter(\"radius\")
+	#material.set_shader_parameter(.)
+"
 
 [node name="VisualTile" type="TextureButton" unique_id=348209479]
 custom_minimum_size = Vector2(64, 64)
@@ -525,6 +1086,7 @@ script = ExtResource("1_4ipli")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2112099576]
 libraries/ = SubResource("AnimationLibrary_2p2qv")
+playback_default_blend_time = 0.3
 
 [node name="Panel" type="Panel" parent="." unique_id=251274556]
 material = SubResource("ShaderMaterial_4ipli")
@@ -548,7 +1110,15 @@ grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(2.25, 3)
 mouse_filter = 1
-text = " "
+text = "A"
 label_settings = SubResource("LabelSettings_4ipli")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=341883605]
+tree_root = SubResource("AnimationNodeStateMachine_1xr65")
+anim_player = NodePath("../AnimationPlayer")
+script = SubResource("GDScript_2p2qv")
+
+[node name="VisualManager" type="Node" parent="." unique_id=1638780769]
+script = SubResource("GDScript_3eav7")

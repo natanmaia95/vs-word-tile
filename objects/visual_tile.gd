@@ -1,54 +1,33 @@
 class_name VisualTile extends TextureButton
 
+const VISUAL_TILE = preload("uid://ds8omu6g4wqyo")
+
+
 signal placed(tile:String)
 
-@onready var animation_player:AnimationPlayer = find_child("AnimationPlayer")
 
-## We should make this a getter to pull from game state
-#var cursor_letter:String = " "
-const VISUAL_TILE = preload("uid://ds8omu6g4wqyo")
+#@onready var animation_player:AnimationPlayer = find_child("AnimationPlayer")
+@onready var animation_tree:AnimationTree = find_child("AnimationTree")
 
 var draggable:bool = false
 var swappable:bool = false
 var letter : String = "" :
 	set(value):
-		if active and animation_player:
-			animation_player.play(&"show", -1, -4., true)
-			await animation_player.animation_finished
 		letter = value.capitalize()
-		if active and animation_player:
-			animation_player.play(&"show_drop", -1, 4)
 		%LblLetter.text = letter
 
 var active:bool = false:
 	set(value):
-		if active != value and is_node_ready():
-			if(value):
-				animation_player.play(&"show_drop", -1, 4)
-			else:
-				animation_player.play(&"show", -1, -2., true)
 		active = value
+		if animation_tree:
+			animation_tree.placed = active
 
 func _ready() -> void:
-	animation_player.play(&"hover_inactive", -1, -100., true)
 	mouse_entered.connect(hover.bind(true))
 	mouse_exited.connect(hover.bind(false))
-	if(active):
-		animation_player.play(&"show_drop", -1, 4)
-	else:
-		animation_player.play(&"show", -1, -2., true)
-	
 
 func hover(on:bool) -> void:
-	if animation_player.is_playing() and not animation_player.current_animation.begins_with("hover"):
-		return
-	if active:
-		return
-	else:
-		if on:
-			animation_player.play(&"hover_inactive", -1, 8)
-		else:
-			animation_player.play(&"hover_inactive", -1, -2., true)
+	animation_tree.hover = on
 
 func _get_drag_data(at_position: Vector2) -> Variant:
 	if draggable and letter.length() > 0:
@@ -58,8 +37,8 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 		copy.offset_transform_enabled = true
 		#copy.offset_transform_position = -at_position
 		copy.offset_transform_position_ratio = -Vector2(.5,.5)
-		#active = false
 		set_drag_preview(copy)
+		copy.active = true
 		return self
 	return null
 
