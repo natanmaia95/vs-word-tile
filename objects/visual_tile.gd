@@ -1,70 +1,57 @@
 class_name VisualTile extends TextureButton
 
+class DropData:
+	var coord:Vector2i
+	var data:int
+
 const VISUAL_TILE = preload("uid://ds8omu6g4wqyo")
 
-
+signal removed()
 signal placed(tile_data:int)
 
 @onready var animation_tree:AnimationTree = find_child("AnimationTree")
 var data:int = 0:
 	set(new):
 		data = new
-		letter = TD.get_letter(data)
-		
-
-var draggable:bool = false
-var swappable:bool = false
-var letter : String = "":
-	set(value):
-		%LblLetter.text = value.capitalize()
-
-var active:bool = false:
-	set(value):
-		active = value
-		if animation_tree:
-			animation_tree.placed = active
+		_update_display()
+		if TD.is_empty(data):
+			removed.emit()
 
 func _ready() -> void:
 	mouse_entered.connect(hover.bind(true))
 	mouse_exited.connect(hover.bind(false))
+	_update_display()
 
 func hover(on:bool) -> void:
 	animation_tree.hover = on
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	if draggable and data > 0:
+	if TD.get_temporary(data) and data > 0:
 		var copy:VisualTile = VISUAL_TILE.instantiate()
 		copy.data = data
-		copy.draggable = false
 		copy.offset_transform_enabled = true
 		#copy.offset_transform_position = -at_position
 		copy.offset_transform_position_ratio = -Vector2(.5,.5)
 		set_drag_preview(copy)
-		copy.active = true
 		return self
 	return null
 
 
 func _drop_data(_at_position: Vector2, drop_data: Variant) -> void:
-	var has_letter:bool = letter.length()
-	var old_data:int = data
-	var old_active:bool = active
-	data = drop_data.data
-	active = true
-	if drop_data.swappable and swappable: # tile in hand, swappable
-		drop_data.data = old_data
-		drop_data.active = old_active
-	elif has_letter and active: # tile on board already and is active
-		data = old_data
-		drop_data.active = true
-	else: # placing tile on inactive board tile
-		drop_data.data = 0
-		drop_data.active = false
-		draggable = true
-		swappable = true
+	var new_data = drop_data.data
+	drop_data.data = data
+	data = new_data
+	if !TD.is_empty(data):
 		placed.emit(data)
 
 func _can_drop_data(_at_position: Vector2, drop_data: Variant) -> bool:
-	if not drop_data is VisualTile:
-		return false
-	return true
+	return drop_data is VisualTile
+
+func _update_display() -> void:
+	if not is_node_ready():
+		return
+	var empty = TD.is_empty(data)
+	var temporary = TD.get_temporary(data)
+	%LblLetter.text = TD.get_letter(data)
+	animation_tree.placed = !empty and temporary
+	animation_tree.submitted = !empty and !temporary

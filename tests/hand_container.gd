@@ -14,12 +14,12 @@ func _update_hand(hand:Array[int]) -> void:
 		if hand.size() > i:
 			visual_tile.data = hand[i]
 			#print(hand[i])
-			visual_tile.active = true
-			visual_tile.draggable = true
-			visual_tile.swappable = true
-		else:
-			visual_tile.letter = ""
-			visual_tile.active = false
-			visual_tile.draggable = false
-			visual_tile.swappable = false
+			#visual_tile.active = true
+			#visual_tile.draggable = true
+			#visual_tile.swappable = true
+		#else:
+			#visual_tile.letter = ""
+			#visual_tile.active = false
+			#visual_tile.draggable = false
+			#visual_tile.swappable = false
 		

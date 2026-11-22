@@ -14,12 +14,17 @@ func _initialize_board() -> void:
 		for x:int in range(columns):
 			var tile:VisualTile = VISUAL_TILE.instantiate()
 			add_child(tile)
-			tile.placed.connect(tile_placed.bind(Vector2i(x,y)))
+			var coord:Vector2i = Vector2i(x,y)
+			tile.placed.connect(tile_placed.bind(coord))
+			tile.removed.connect(tile_removed.bind(coord))
 
 func tile_placed(data:int, coord:Vector2i) -> void:
 	print("Tile placed (temporarily) at ",coord,": ",data)
 	game.player_place_tile(coord, data)
 
+func tile_removed(coord:Vector2i) -> void:
+	print("Tile removed from ", coord)
+	game.player_remove_tile(coord)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass

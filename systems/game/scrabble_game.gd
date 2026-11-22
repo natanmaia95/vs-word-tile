@@ -35,6 +35,8 @@ func player_place_tile(pos:Vector2i, tile_data:int) -> bool:
 	_check_for_new_word(pos) #check this row and column for words *including this position*
 	return true
 
+func player_remove_tile(pos:Vector2i) -> void:
+	board.set_tile_data(pos, 0)
 
 func _connected_tiles(from_coord:Vector2i, x_axis:bool) -> Dictionary[Vector2i, int]:
 	var tiles:Dictionary[Vector2i, int]
@@ -81,6 +83,8 @@ func _check_for_new_word(pos:Vector2i):
 	
 	var horizontal_letters = _get_letters(pos, horizontal_data, true)
 	var vertical_letters = _get_letters(pos, vertical_data, false)
+	
+	print(horizontal_letters, ", " ,vertical_letters)
 
 	var horizontal_words = WordSearch.find_words_in_string(horizontal_letters, distro.word_list)
 	var vertical_words = WordSearch.find_words_in_string(horizontal_letters, distro.word_list)
