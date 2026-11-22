@@ -18,5 +18,4 @@ func get_tile() -> int:
 	var data:int = 0
 	data = TD.set_letter(_tiles.pick_random(), data)
 	data = TD.set_temporary(true, data)
-	print("drew ", data)
 	return data

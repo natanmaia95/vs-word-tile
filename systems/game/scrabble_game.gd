@@ -29,10 +29,20 @@ func draw_hand_tiles(hand_size:int = 7) -> void:
 
 
 
-func player_place_tile(pos:Vector2i, tile_data:int) -> bool:
+func player_place_tile(pos:Vector2i, tile_data:int) -> bool: # True if all tiles pass
 	if board.get_tile_data(pos) != 0: return false
 	board.set_tile_data(pos, tile_data)
-	_check_for_new_word(pos) #check this row and column for words *including this position*
+	var failed_check = false
+	var temporary_tiles = board.get_temporary_tiles()
+	for coord:Vector2i in temporary_tiles.keys():
+		var word_check:Array = _check_for_new_word(coord)
+		if not word_check[0]:
+			failed_check = true
+	# Submit the tiles if we're all passed!
+	if not failed_check:
+		print("Submitting tiles!")
+		for coord:Vector2i in temporary_tiles.keys():
+			board.set_tile_data(coord, TD.set_temporary(false, temporary_tiles[coord]))
 	return true
 
 func player_remove_tile(pos:Vector2i) -> void:
@@ -77,7 +87,7 @@ func _get_letters(from_coord:Vector2i, data:Dictionary[Vector2i, int], x_axis:bo
 		letters += TD.get_letter(data[coord])
 	return letters
 
-func _check_for_new_word(pos:Vector2i):
+func _check_for_new_word(pos:Vector2i) -> Array:
 	var horizontal_data:Dictionary[Vector2i, int] = _connected_tiles(_earliest_filled_tile(pos, true), true)
 	var vertical_data:Dictionary[Vector2i, int] = _connected_tiles(_earliest_filled_tile(pos, false), false)
 	
@@ -86,7 +96,16 @@ func _check_for_new_word(pos:Vector2i):
 	
 	print(horizontal_letters, ", " ,vertical_letters)
 
-	var horizontal_words = WordSearch.find_words_in_string(horizontal_letters, distro.word_list)
-	var vertical_words = WordSearch.find_words_in_string(horizontal_letters, distro.word_list)
+	var horizontal_words:Array[String] = []
+	var horizontal_required:bool = horizontal_letters.length() > 1
+	if horizontal_required:
+		horizontal_words = WordSearch.find_words_in_string(horizontal_letters, distro.word_list)
+		
+	var vertical_words:Array[String] = []
+	var vertical_required:bool = vertical_letters.length() > 1
+	if vertical_required:
+		vertical_words = WordSearch.find_words_in_string(vertical_letters, distro.word_list)
 	
-	print(horizontal_words, vertical_words)
+	var passes_check:bool = (!vertical_required or (vertical_required and not vertical_words.is_empty())) \
+						and (!horizontal_required or (horizontal_required and not horizontal_words.is_empty()))
+	return [passes_check, horizontal_words, vertical_words]

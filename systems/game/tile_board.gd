@@ -40,6 +40,13 @@ func _set_tiles(list:Array[Array]):
 			_data[pos] = tile_data
 	updated_tiles.emit(changed_positions)
 
+func get_temporary_tiles() -> Dictionary[Vector2i, int]:
+	var tiles:Dictionary[Vector2i, int]
+	for coord:Vector2i in _data.keys():
+		var data = _data[coord]
+		if TD.get_temporary(data):
+			tiles[coord] = data
+	return tiles
 
 
 

@@ -18,3 +18,4 @@ func _init() -> void:
 		"U": 1, "V": 4, "W": 4, "X": 8, "Y": 4, "Z": 10
 	}
 	word_list_path = "res://assets/word_lists/enable2k.txt"
+	load_word_list(word_list_path)
