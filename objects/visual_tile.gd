@@ -15,8 +15,11 @@ var data:int = 0:
 		var old:int = data
 		data = new
 		_update_display()
-		if old != new and TD.is_empty(data):
-			removed.emit()
+		if old != new:
+			if TD.is_empty(data):
+				removed.emit()
+			else:
+				placed.emit(data)
 
 func _ready() -> void:
 	mouse_entered.connect(hover.bind(true))
@@ -42,11 +45,9 @@ func _drop_data(_at_position: Vector2, drop_data: Variant) -> void:
 	var new_data = drop_data.data
 	drop_data.data = data
 	data = new_data
-	if !TD.is_empty(data):
-		placed.emit(data)
 
 func _can_drop_data(_at_position: Vector2, drop_data: Variant) -> bool:
-	return drop_data is VisualTile
+	return drop_data is VisualTile and (TD.is_empty(data) or TD.get_temporary(data))
 
 func _update_display() -> void:
 	if not is_node_ready():
