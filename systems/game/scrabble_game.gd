@@ -111,4 +111,6 @@ func _check_for_new_word(pos:Vector2i) -> Array:
 	
 	var passes_check:bool = (!vertical_required or (vertical_required and not vertical_words.is_empty())) \
 						and (!horizontal_required or (horizontal_required and not horizontal_words.is_empty()))
+	if passes_check and (not horizontal_required and not vertical_required):
+		passes_check = false
 	return [passes_check, horizontal_words, vertical_words]
