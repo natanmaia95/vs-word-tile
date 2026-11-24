@@ -27,7 +27,9 @@ func draw_hand_tiles(hand_size:int = 7) -> void:
 		hand.append(bag.get_tile())
 	hand_changed.emit(hand)
 
-
+func shuffle_hand() -> void:
+	hand.shuffle()
+	hand_changed.emit(hand)
 
 
 func player_place_tile(pos:Vector2i, tile_data:int) -> bool: # True if all tiles pass

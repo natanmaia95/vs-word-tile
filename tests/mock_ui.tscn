@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://di0rxjrfdro8x" path="res://tests/mock_ui.gd" id="1_s48ir"]
 [ext_resource type="Script" uid="uid://dvvie1la145uy" path="res://tests/mock_tiles.gd" id="1_sqe0u"]
 [ext_resource type="Script" uid="uid://b5j70waqhkg5e" path="res://systems/game/scrabble_game.gd" id="2_kx1be"]
+[ext_resource type="PackedScene" uid="uid://b646mquj1yh2w" path="res://objects/shuffle_button.tscn" id="4_fva3n"]
 [ext_resource type="PackedScene" uid="uid://ds8omu6g4wqyo" path="res://objects/visual_tile.tscn" id="4_jgpj5"]
 [ext_resource type="Script" uid="uid://ca3xkh0stq2ih" path="res://tests/hand_container.gd" id="4_kx1be"]
 
@@ -86,30 +87,36 @@ layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_jgpj5")
 
-[node name="HandContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=1401861399]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=609879894]
+layout_mode = 2
+
+[node name="ShuffleButton" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1111841452 instance=ExtResource("4_fva3n")]
+layout_mode = 2
+
+[node name="HandContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1401861399]
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("4_kx1be")
 
-[node name="VisualTile" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=348209479 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=348209479 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile2" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=544510574 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile2" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=544510574 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile3" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=147743 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile3" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=147743 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile4" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=2123774202 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile4" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=2123774202 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile5" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=2017626980 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile5" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=2017626980 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile6" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=167558328 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile6" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=167558328 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile7" parent="HBoxContainer/VBoxContainer/PanelContainer/HandContainer" unique_id=1905638188 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile7" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=1905638188 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
 [node name="Player2" type="CenterContainer" parent="HBoxContainer" unique_id=394896204]

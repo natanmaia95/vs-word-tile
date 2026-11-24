@@ -15,7 +15,11 @@ var data:int = 0:
 			if TD.is_empty(data):
 				removed.emit()
 			else:
+				if animation_tree:
+					var state_machine:AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+					state_machine.travel(&"inactive")
 				placed.emit(data)
+
 var is_copy:bool = false
 @onready var animation_tree:AnimationTree = find_child("AnimationTree")
 

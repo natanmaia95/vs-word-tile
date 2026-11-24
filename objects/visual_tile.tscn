@@ -1217,6 +1217,7 @@ vertical_alignment = 1
 tree_root = SubResource("AnimationNodeStateMachine_1xr65")
 anim_player = NodePath("../AnimationPlayer")
 script = SubResource("GDScript_2p2qv")
+placed = true
 
 [node name="VisualManager" type="Node" parent="." unique_id=1638780769]
 script = SubResource("GDScript_3eav7")
