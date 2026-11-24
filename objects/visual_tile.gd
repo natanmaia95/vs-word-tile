@@ -1,16 +1,11 @@
 class_name VisualTile extends TextureButton
 
-class DropData:
-	var coord:Vector2i
-	var data:int
-
 const VISUAL_TILE = preload("uid://ds8omu6g4wqyo")
 
 signal removed()
 signal placed(tile_data:int)
 
 var dragging:int = 0
-@onready var animation_tree:AnimationTree = find_child("AnimationTree")
 var data:int = 0:
 	set(new):
 		var old:int = data
@@ -21,24 +16,20 @@ var data:int = 0:
 				removed.emit()
 			else:
 				placed.emit(data)
+var is_copy:bool = false
+@onready var animation_tree:AnimationTree = find_child("AnimationTree")
 
 func _ready() -> void:
-	#mouse_entered.connect(hover.bind(true))
-	#mouse_exited.connect(hover.bind(false))
 	_update_display()
 
-#func hover(on:bool) -> void:
-	#animation_tree.hover = on
-
-func _dropped(node:Node) -> void:
+func _dropped(_node:Node) -> void:
 	var mock_ui = find_parent("MockUI")
-	#if node = dragging:
 	if dragging:
 		data = dragging
 		dragging = 0
 		mock_ui.child_exiting_tree.disconnect(_dropped)
 
-func _get_drag_data(_at_position: Vector2) -> Variant:
+func _get_drag_data(at_position: Vector2) -> Variant:
 	if TD.get_temporary(data) and data > 0:
 		dragging = data
 		data = 0
@@ -46,8 +37,14 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 		print(dragging)
 		copy.data = dragging
 		copy.offset_transform_enabled = true
-		#copy.offset_transform_position = -at_position
-		copy.offset_transform_position_ratio = -Vector2(.5,.5)
+		copy.offset_transform_position = -at_position
+		copy.is_copy = true
+		var starting_position:Vector2 = copy.offset_transform_position
+		var ending_position:Vector2 = -size/2.;
+		create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE).tween_method(func(value:Variant) -> void:
+			if is_instance_valid(copy):
+				copy.offset_transform_position = lerp(starting_position, ending_position, value)
+		, 0., 1., .3)
 		find_parent("MockUI").child_exiting_tree.connect(_dropped)
 		set_drag_preview(copy)
 		return self
@@ -71,3 +68,4 @@ func _update_display() -> void:
 	%LblLetter.text = TD.get_letter(data)
 	animation_tree.placed = !empty and temporary
 	animation_tree.submitted = !empty and !temporary
+	animation_tree.is_copy = is_copy

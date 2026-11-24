@@ -263,6 +263,93 @@ tracks/1/keys = {
 "values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_3rx8v"]
+resource_name = "copy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.03333336),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.03333336),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.125]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/LblLetter:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_1ix5a"]
 resource_name = "state_inactive"
 tracks/0/type = "value"
@@ -850,6 +937,7 @@ _data = {
 &"RESET": SubResource("Animation_1xr65"),
 &"border_size": SubResource("Animation_7vp1w"),
 &"color_placed": SubResource("Animation_odmu4"),
+&"copy": SubResource("Animation_3rx8v"),
 &"inactive": SubResource("Animation_1ix5a"),
 &"inactive_hover": SubResource("Animation_fdq3c"),
 &"placed": SubResource("Animation_l0nwh"),
@@ -932,6 +1020,9 @@ shader_parameter/line_c = Color(0.11764706, 0.101960786, 0.1254902, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_4ipli"]
 font = ExtResource("2_1xr65")
 font_size = 48
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ix5a"]
+animation = &"copy"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2p2qv"]
 animation = &"inactive_hover"
@@ -1035,8 +1126,14 @@ switch_mode = 2
 advance_mode = 2
 advance_expression = "not placed and hover"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ngjwe"]
+advance_mode = 2
+advance_expression = "is_copy"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1xr65"]
-states/Start/position = Vector2(543, -33)
+states/Start/position = Vector2(543, -57)
+states/copy/node = SubResource("AnimationNodeAnimation_1ix5a")
+states/copy/position = Vector2(731, -84)
 states/inactive/node = SubResource("AnimationNodeAnimation_2p2qv")
 states/inactive/position = Vector2(543, 148)
 states/inactive_hover/node = SubResource("AnimationNodeAnimation_5u0ay")
@@ -1045,14 +1142,15 @@ states/placed/node = SubResource("AnimationNodeAnimation_1xr65")
 states/placed/position = Vector2(721, 63)
 states/submitted/node = SubResource("AnimationNodeAnimation_fdq3c")
 states/submitted/position = Vector2(543, 276)
-transitions = ["inactive_hover", "inactive", SubResource("AnimationNodeStateMachineTransition_1ix5a"), "inactive", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_1xr65"), "Start", "inactive", SubResource("AnimationNodeStateMachineTransition_5u0ay"), "inactive", "submitted", SubResource("AnimationNodeStateMachineTransition_2p2qv"), "submitted", "inactive", SubResource("AnimationNodeStateMachineTransition_fdq3c"), "inactive_hover", "submitted", SubResource("AnimationNodeStateMachineTransition_l0nwh"), "submitted", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_2c5of"), "inactive", "placed", SubResource("AnimationNodeStateMachineTransition_7vp1w"), "placed", "inactive", SubResource("AnimationNodeStateMachineTransition_odmu4"), "placed", "submitted", SubResource("AnimationNodeStateMachineTransition_3rx8v"), "submitted", "placed", SubResource("AnimationNodeStateMachineTransition_2tef6"), "inactive_hover", "placed", SubResource("AnimationNodeStateMachineTransition_loj2r"), "placed", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_r6wtu")]
-graph_offset = Vector2(78, -73)
+transitions = ["inactive_hover", "inactive", SubResource("AnimationNodeStateMachineTransition_1ix5a"), "inactive", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_1xr65"), "Start", "inactive", SubResource("AnimationNodeStateMachineTransition_5u0ay"), "inactive", "submitted", SubResource("AnimationNodeStateMachineTransition_2p2qv"), "submitted", "inactive", SubResource("AnimationNodeStateMachineTransition_fdq3c"), "inactive_hover", "submitted", SubResource("AnimationNodeStateMachineTransition_l0nwh"), "submitted", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_2c5of"), "inactive", "placed", SubResource("AnimationNodeStateMachineTransition_7vp1w"), "placed", "inactive", SubResource("AnimationNodeStateMachineTransition_odmu4"), "placed", "submitted", SubResource("AnimationNodeStateMachineTransition_3rx8v"), "submitted", "placed", SubResource("AnimationNodeStateMachineTransition_2tef6"), "inactive_hover", "placed", SubResource("AnimationNodeStateMachineTransition_loj2r"), "placed", "inactive_hover", SubResource("AnimationNodeStateMachineTransition_r6wtu"), "Start", "copy", SubResource("AnimationNodeStateMachineTransition_ngjwe")]
+graph_offset = Vector2(66, -142)
 
 [sub_resource type="GDScript" id="GDScript_2p2qv"]
 script/source = "extends AnimationTree
 @export var hover:bool = false
 @export var placed:bool = false
 @export var submitted:bool = false
+@export var is_copy:bool = false
 "
 
 [sub_resource type="GDScript" id="GDScript_3eav7"]
