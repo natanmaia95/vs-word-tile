@@ -18,6 +18,7 @@ var game : ScrabbleGame
 
 func initialize(game_in:ScrabbleGame) -> void:
 	game = game_in
+	
 	game.board.updated_tiles.connect(on_updated_tiles)
 	
 	if %test_cursor:

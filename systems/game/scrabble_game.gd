@@ -11,6 +11,7 @@ var distro : Distribution
 func initialize() -> void:
 	distro = OfficialEnglishDistribution.new()
 	board = TileBoard.new()
+	
 	bag = TileBag.new()
 	bag.populate(distro)
 	draw_hand_tiles()

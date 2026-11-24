@@ -9,7 +9,7 @@ var game:ScrabbleGame:
 func _initialize_board() -> void:
 	if not is_node_ready() or not game:
 		return
-	
+	columns = game.board.size
 	for y:int in range(columns):
 		for x:int in range(columns):
 			var tile:VisualTile = VISUAL_TILE.instantiate()

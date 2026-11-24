@@ -48,6 +48,24 @@ func get_temporary_tiles() -> Dictionary[Vector2i, int]:
 			tiles[coord] = data
 	return tiles
 
+func set_starting_word(distro:Distribution) -> void:
+	var starting_word:String = ""
+	var words:Array = distro.word_list.split("\n") as Array
+	while starting_word.length() > size or starting_word.length() < 4:
+		starting_word = words.pick_random()
+		
+	print_debug("Found starting word ", starting_word)
+	@warning_ignore("integer_division")
+	var mid_point:int = size/2
+	@warning_ignore("integer_division")
+
+	var half_word = starting_word.length()/2 - (0 if starting_word.length()%2 == 1 else 1)
+	var tiles:Array[Array]
+	for i:int in range(starting_word.length()):
+		var x = mid_point-half_word+i
+		var tile:int = TD.set_letter(starting_word[i], 0)
+		tiles.append([Vector2i(x,mid_point), tile])
+	set_tiles_bulk(tiles)
 
 
 

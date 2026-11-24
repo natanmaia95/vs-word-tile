@@ -8,6 +8,7 @@ extends Control
 func _ready() -> void:
 	game.initialize()
 	player_board.game = game
+	game.board.set_starting_word(game.distro)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
