@@ -13,4 +13,6 @@ func _update_hand(hand:Array[int]) -> void:
 		var visual_tile:VisualTile = get_child(i)
 		if hand.size() > i:
 			visual_tile.data = hand[i]
+		else:
+			visual_tile.data = 0
 		

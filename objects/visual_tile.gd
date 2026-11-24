@@ -38,7 +38,6 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 		dragging = data
 		data = 0
 		var copy:VisualTile = VISUAL_TILE.instantiate()
-		print(dragging)
 		copy.data = dragging
 		copy.offset_transform_enabled = true
 		copy.offset_transform_position = -at_position

@@ -24,11 +24,13 @@ func remove_hand_tiles(datas:Array[int]) -> void:
 
 func draw_hand_tiles(hand_size:int = 7) -> void:
 	for i:int in range(hand_size):
+		if hand.size() >= hand_size:
+			break
 		hand.append(bag.get_tile())
 	hand_changed.emit(hand)
 
-func shuffle_hand() -> void:
-	hand.shuffle()
+func add_hand_tile(data:int) -> void:
+	hand.append(data)
 	hand_changed.emit(hand)
 
 
@@ -39,15 +41,14 @@ func player_place_tile(pos:Vector2i, tile_data:int) -> bool: # True if all tiles
 	for coord:Vector2i in temporary_tiles.keys():
 		var word_check:Array = _check_for_new_word(coord)
 		if not word_check[0]:
-			print("Failed check at ",coord)
 			failed_check = true
 	# Submit the tiles if we're all passed!
 	if not failed_check:
-		print("Submitting tiles!")
-		remove_hand_tiles(temporary_tiles.values())
 		for coord:Vector2i in temporary_tiles.keys():
 			board.set_tile_data(coord, TD.set_temporary(false, temporary_tiles[coord]))
+		remove_hand_tiles(temporary_tiles.values())
 		draw_hand_tiles()
+		
 	return true
 
 func player_remove_tile(pos:Vector2i) -> void:

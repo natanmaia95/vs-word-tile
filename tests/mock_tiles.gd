@@ -26,10 +26,8 @@ func _initialize_board() -> void:
 func tile_placed(data:int, coord:Vector2i) -> void:
 	print("Tile placed (temporarily) at ",coord,": ",data)
 	game.player_place_tile(coord, data)
+	#game.remove_hand_tiles([data])
 
 func tile_removed(coord:Vector2i) -> void:
 	print("Tile removed from ", coord)
 	game.player_remove_tile(coord)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b646mquj1yh2w" path="res://objects/shuffle_button.tscn" id="4_fva3n"]
 [ext_resource type="PackedScene" uid="uid://ds8omu6g4wqyo" path="res://objects/visual_tile.tscn" id="4_jgpj5"]
 [ext_resource type="Script" uid="uid://ca3xkh0stq2ih" path="res://tests/hand_container.gd" id="4_kx1be"]
+[ext_resource type="PackedScene" uid="uid://cnle4as37kyhs" path="res://objects/remove_tiles_button.tscn" id="7_lflfk"]
 
 [sub_resource type="Resource" id="Resource_jgpj5"]
 script = ExtResource("2_kx1be")
@@ -117,6 +118,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="VisualTile7" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=1905638188 instance=ExtResource("4_jgpj5")]
+layout_mode = 2
+
+[node name="RemoveTilesButton" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=790427307 instance=ExtResource("7_lflfk")]
 layout_mode = 2
 
 [node name="Player2" type="CenterContainer" parent="HBoxContainer" unique_id=394896204]
