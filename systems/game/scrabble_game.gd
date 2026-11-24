@@ -37,11 +37,11 @@ func player_place_tile(pos:Vector2i, tile_data:int) -> bool: # True if all tiles
 	for coord:Vector2i in temporary_tiles.keys():
 		var word_check:Array = _check_for_new_word(coord)
 		if not word_check[0]:
-			print_debug("Failed check at ",coord)
+			print("Failed check at ",coord)
 			failed_check = true
 	# Submit the tiles if we're all passed!
 	if not failed_check:
-		print_debug("Submitting tiles!")
+		print("Submitting tiles!")
 		remove_hand_tiles(temporary_tiles.values())
 		for coord:Vector2i in temporary_tiles.keys():
 			board.set_tile_data(coord, TD.set_temporary(false, temporary_tiles[coord]))
