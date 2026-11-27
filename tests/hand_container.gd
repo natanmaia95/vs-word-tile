@@ -8,11 +8,11 @@ func _ready() -> void:
 	game.hand_changed.connect(_update_hand)
 	_update_hand(game.hand)
 
-func _update_hand(hand:Array[int]) -> void:
+func _update_hand(hand:Array[Tile]) -> void:
 	for i:int in range(get_child_count()):
 		var visual_tile:VisualTile = get_child(i)
 		if hand.size() > i:
-			visual_tile.data = hand[i]
+			visual_tile.tile = hand[i]
 		else:
-			visual_tile.data = 0
+			visual_tile.tile = null
 		

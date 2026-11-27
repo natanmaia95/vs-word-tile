@@ -21,12 +21,12 @@ func _initialize_board() -> void:
 	game.board.updated_tiles.connect(func(positions:Array[Vector2i]) -> void:
 		for coord:Vector2i in positions:
 			var visual_tile:VisualTile = get_child(coord.y * columns + coord.x)
-			visual_tile.data = game.board.get_tile_data(coord)
+			visual_tile.tile = game.board.get_tile_at(coord)
 	)
 
-func tile_placed(data:int, coord:Vector2i) -> void:
-	print("Tile placed (temporarily) at ",coord,": ",data)
-	game.player_place_tile(coord, data)
+func tile_placed(tile:Tile, coord:Vector2i) -> void:
+	print("Tile placed (temporarily) at ",coord,": ",tile)
+	game.player_place_tile(coord, tile)
 	#game.remove_hand_tiles([data])
 
 func tile_removed(coord:Vector2i) -> void:

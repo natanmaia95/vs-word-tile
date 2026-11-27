@@ -21,11 +21,12 @@ func _ready() -> void:
 			hand_container.add_child(child)
 	)
 	remove_tiles_button.pressed.connect(func() -> void:
-		var temp_tiles:Dictionary[Vector2i, int] = game.board.get_temporary_tiles()
+		var temp_tiles:Dictionary[Vector2i, Tile] = game.board.get_temporary_tiles()
+		var emptied_tiles:Dictionary[Vector2i, Tile]
 		for coord:Vector2i in temp_tiles.keys():
-			game.board.set_tile_data(coord,0)
-			game.hand_changed.emit(game.hand)
-			#game.add_hand_tile(temp_tiles[coord])
+			emptied_tiles[coord] = Tile.new()
+			game.add_hand_tile(temp_tiles[coord])
+		game.board.set_tiles_bulk(emptied_tiles)
 	)
 
 
