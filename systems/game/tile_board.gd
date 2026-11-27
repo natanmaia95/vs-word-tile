@@ -64,6 +64,8 @@ func set_starting_word(distro:Distribution) -> void:
 	for i:int in range(starting_word.length()):
 		var x = mid_point-half_word+i
 		var tile:int = TD.set_letter(starting_word[i], 0)
+		var points:int = distro.point_values.get(starting_word[i].to_upper())
+		tile = TD.set_points(points, tile)
 		tiles.append([Vector2i(x,mid_point), tile])
 	set_tiles_bulk(tiles)
 

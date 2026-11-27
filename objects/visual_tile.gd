@@ -68,7 +68,8 @@ func _update_display() -> void:
 		return
 	var empty = TD.is_empty(data)
 	var temporary = TD.get_temporary(data)
-	%LblLetter.text = TD.get_letter(data)
+	%Letter.text = TD.get_letter(data)
+	%Points.text = str(TD.get_points(data))
 	animation_tree.placed = !empty and temporary
 	animation_tree.submitted = !empty and !temporary
 	animation_tree.is_copy = is_copy

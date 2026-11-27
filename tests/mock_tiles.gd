@@ -23,6 +23,7 @@ func _initialize_board() -> void:
 			var visual_tile:VisualTile = get_child(coord.y * columns + coord.x)
 			visual_tile.data = game.board.get_tile_data(coord)
 	)
+
 func tile_placed(data:int, coord:Vector2i) -> void:
 	print("Tile placed (temporarily) at ",coord,": ",data)
 	game.player_place_tile(coord, data)

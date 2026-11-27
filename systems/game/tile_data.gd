@@ -7,13 +7,14 @@ enum Type {
 }
 
 ## Bit layout:
-##  15 |        14 | 13   12   11 | 10   09   08 | 07   06   05   04   03   02   01   00  
-## evil| temporary | unused       | type data    | single letter data
+##  15 | 14        | 13   12   11 10 | 09   08      | 07   06   05   04   03   02   01   00  
+## evil| temporary | point value     | type data    | single letter data
 
 const MASK_LETTER    = 0b0000000011111111
-const MASK_TYPE      = 0b0000011100000000
+const MASK_TYPE      = 0b0000001100000000
 const MASK_EVIL      = 0b1000000000000000
 const MASK_TEMPORARY = 0b0100000000000000
+const MASK_POINTS    = 0b0011110000000000
 const MASK_16BIT = 0xFFFF
 
 
@@ -30,6 +31,9 @@ static func get_temporary(tile:int) -> bool:
 static func get_type(tile:int) -> Type:
 	var tile_zone = (tile & MASK_TYPE) >> 8
 	return tile_zone as Type
+	
+static func get_points(tile:int) -> int:
+	return (tile & MASK_POINTS) >> 10
 
 
 static func get_letter(tile:int) -> String:
@@ -64,7 +68,13 @@ static func set_type(type:Type, tile:int) -> int:
 	var type_bits = int(type) << 8
 	tile = (tile & ~MASK_TYPE) | type_bits
 	return tile & MASK_16BIT
-
+	
+static func set_points(points:int, tile:int) -> int:
+	var point_bits = points << 10
+	if point_bits > MASK_POINTS:
+		printerr("Points too big ", points)
+	tile = (tile & ~MASK_POINTS) | point_bits
+	return tile & MASK_16BIT
 
 static func set_letter(letter:String, tile:int) -> int:
 	if letter.length() != 1:
