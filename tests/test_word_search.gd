@@ -5,7 +5,6 @@ var matches : Array[RegExMatch]
 
 func _ready() -> void:
 	distro = OfficialEnglishDistribution.new()
-	print(distro.load_word_list())
 	
 	var spaces = [" ", " ", "T", " ", " ", " ", "L", " "]
 	var hand : Array[String] = ["A", "D", "E", "L", "O", "S", "T"]

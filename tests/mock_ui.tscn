@@ -83,45 +83,52 @@ theme_override_constants/v_separation = 0
 columns = 7
 script = ExtResource("1_sqe0u")
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=743073388]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=945062075]
+layout_mode = 2
+
+[node name="ShuffleButton" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1111841452 instance=ExtResource("4_fva3n")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=743073388]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_jgpj5")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=609879894]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=609879894]
 layout_mode = 2
 
-[node name="ShuffleButton" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1111841452 instance=ExtResource("4_fva3n")]
-layout_mode = 2
-
-[node name="HandContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1401861399]
+[node name="HandContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1401861399]
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("4_kx1be")
 
-[node name="VisualTile" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=348209479 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=348209479 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile2" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=544510574 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile2" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=544510574 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile3" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=147743 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile3" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=147743 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile4" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=2123774202 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile4" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=2123774202 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile5" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=2017626980 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile5" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=2017626980 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile6" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=167558328 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile6" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=167558328 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="VisualTile7" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=1905638188 instance=ExtResource("4_jgpj5")]
+[node name="VisualTile7" parent="HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/HandContainer" unique_id=1905638188 instance=ExtResource("4_jgpj5")]
 layout_mode = 2
 
-[node name="RemoveTilesButton" parent="HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=790427307 instance=ExtResource("7_lflfk")]
+[node name="RemoveTilesButton" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=790427307 instance=ExtResource("7_lflfk")]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Player2" type="CenterContainer" parent="HBoxContainer" unique_id=394896204]
 layout_mode = 2

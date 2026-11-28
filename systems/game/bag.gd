@@ -1,25 +1,22 @@
-class_name TileBag
-extends RefCounted
+class_name TileBag extends Resource
 
+signal shuffled()
+signal emptied()
 
-## Stores tiles as letters for now
-@warning_ignore("unused_private_class_variable")
-var _tiles : Array[int] = []
+var _tiles : Array[Tile] = []
 
+func shuffle() -> void:
+	_tiles.shuffle()
+	shuffled.emit()
+	changed.emit()
+	
+func get_tile() -> Tile:
+	var tile:Tile = _tiles.pop_back()
+	changed.emit()
+	if _tiles.size() == 0:
+		emptied.emit()
+	return tile
 
-func populate(distro:Distribution) -> void:
-	_tiles.clear()
-	for letter in distro.letter_amounts.keys():
-		var points:int = distro.point_values.get(letter)
-		print("letter",letter, "points",points)
-		var data:int = 0
-		data = TD.set_letter(letter, data)
-		data = TD.set_points(points, data)
-		for _i in range(distro.letter_amounts.get(letter)):
-			_tiles.append(data)
-
-func get_tile() -> int:
-	# replace this with weighted stuff or whatever eventually
-	var data:int = 0
-	data = TD.set_temporary(true, _tiles.pick_random())
-	return data
+func add_tile(tile:Tile) -> void:
+	_tiles.append(tile)
+	changed.emit()

@@ -236,6 +236,105 @@ tracks/6/keys = {
 "values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_l0nwh"]
+resource_name = "in_hand"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:material:shader_parameter/line_c")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.11764706, 0.101960786, 0.1254902, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:material:shader_parameter/line_b")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/line_a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.03333336),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:material:shader_parameter/radius")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.03333336),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.125]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:material:shader_parameter/outer_size")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.15, 0.6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:material:shader_parameter/inner_size")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.25, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/MarginContainer/Letter:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6666667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 0), Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel/MarginContainer/Points:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.6666667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.8745098, 0.30980393, 0.8039216, 0), Color(0.8745098, 0.30980393, 0.8039216, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_fdq3c"]
 resource_name = "state_inactive_hover"
 tracks/0/type = "value"
@@ -347,7 +446,7 @@ tracks/8/keys = {
 "values": [Color(0.8745098, 0.30980393, 0.8039216, 0), Color(0.8745098, 0.30980393, 0.8039216, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_l0nwh"]
+[sub_resource type="Animation" id="Animation_5u0ay"]
 resource_name = "placed"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -585,8 +684,9 @@ tracks/10/keys = {
 _data = {
 &"RESET": SubResource("Animation_1xr65"),
 &"copy": SubResource("Animation_3rx8v"),
+&"in_hand": SubResource("Animation_l0nwh"),
 &"inactive_hover": SubResource("Animation_fdq3c"),
-&"placed": SubResource("Animation_l0nwh"),
+&"placed": SubResource("Animation_5u0ay"),
 &"submitted": SubResource("Animation_2p2qv")
 }
 
@@ -668,6 +768,18 @@ font_size = 32
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ix5a"]
 animation = &"copy"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5u0ay"]
+animation = &"inactive_hover"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l0nwh"]
+animation = &"in_hand"
+use_custom_timeline = true
+timeline_length = 0.2
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2p2qv"]
 animation = &"inactive_hover"
 play_mode = 1
@@ -701,58 +813,101 @@ advance_mode = 2
 xfade_time = 0.1
 switch_mode = 2
 advance_mode = 2
-advance_expression = "submitted"
+advance_expression = "placement == 3"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fdq3c"]
 xfade_time = 0.1
 switch_mode = 2
 advance_mode = 2
-advance_expression = "not submitted and not hover and not placed"
+advance_expression = "placement == 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7vp1w"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "placed"
+advance_expression = "placement == 2"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_odmu4"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "not placed and not hover"
+advance_expression = "placement == 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3rx8v"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "submitted"
+advance_expression = "placement == 3"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2tef6"]
 xfade_time = 0.3
 switch_mode = 2
 advance_mode = 2
-advance_expression = "not submitted and placed"
+advance_expression = "placement == 2"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ngjwe"]
 advance_mode = 2
 advance_expression = "is_copy"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2c5of"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_loj2r"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r6wtu"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ta42r"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1ix5a"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 4"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l0nwh"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p24tk"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xadhh"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 4"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1xr65"]
+states/End/position = Vector2(1379, 93)
 states/Start/position = Vector2(543, -57)
 states/copy/node = SubResource("AnimationNodeAnimation_1ix5a")
 states/copy/position = Vector2(731, -84)
+states/dragging/node = SubResource("AnimationNodeAnimation_5u0ay")
+states/dragging/position = Vector2(1030, 37)
+states/in_hand/node = SubResource("AnimationNodeAnimation_l0nwh")
+states/in_hand/position = Vector2(829, -40)
 states/inactive/node = SubResource("AnimationNodeAnimation_2p2qv")
 states/inactive/position = Vector2(543, 37)
 states/placed/node = SubResource("AnimationNodeAnimation_1xr65")
 states/placed/position = Vector2(701, 93)
 states/submitted/node = SubResource("AnimationNodeAnimation_fdq3c")
 states/submitted/position = Vector2(543, 159)
-transitions = ["Start", "inactive", SubResource("AnimationNodeStateMachineTransition_5u0ay"), "inactive", "submitted", SubResource("AnimationNodeStateMachineTransition_2p2qv"), "submitted", "inactive", SubResource("AnimationNodeStateMachineTransition_fdq3c"), "inactive", "placed", SubResource("AnimationNodeStateMachineTransition_7vp1w"), "placed", "inactive", SubResource("AnimationNodeStateMachineTransition_odmu4"), "placed", "submitted", SubResource("AnimationNodeStateMachineTransition_3rx8v"), "submitted", "placed", SubResource("AnimationNodeStateMachineTransition_2tef6"), "Start", "copy", SubResource("AnimationNodeStateMachineTransition_ngjwe")]
+transitions = ["Start", "inactive", SubResource("AnimationNodeStateMachineTransition_5u0ay"), "inactive", "submitted", SubResource("AnimationNodeStateMachineTransition_2p2qv"), "submitted", "inactive", SubResource("AnimationNodeStateMachineTransition_fdq3c"), "inactive", "placed", SubResource("AnimationNodeStateMachineTransition_7vp1w"), "placed", "inactive", SubResource("AnimationNodeStateMachineTransition_odmu4"), "placed", "submitted", SubResource("AnimationNodeStateMachineTransition_3rx8v"), "submitted", "placed", SubResource("AnimationNodeStateMachineTransition_2tef6"), "Start", "copy", SubResource("AnimationNodeStateMachineTransition_ngjwe"), "inactive", "in_hand", SubResource("AnimationNodeStateMachineTransition_2c5of"), "in_hand", "placed", SubResource("AnimationNodeStateMachineTransition_loj2r"), "placed", "in_hand", SubResource("AnimationNodeStateMachineTransition_r6wtu"), "in_hand", "inactive", SubResource("AnimationNodeStateMachineTransition_ta42r"), "in_hand", "dragging", SubResource("AnimationNodeStateMachineTransition_1ix5a"), "dragging", "placed", SubResource("AnimationNodeStateMachineTransition_l0nwh"), "dragging", "in_hand", SubResource("AnimationNodeStateMachineTransition_p24tk"), "placed", "dragging", SubResource("AnimationNodeStateMachineTransition_xadhh")]
 graph_offset = Vector2(66, -142)
 
 [sub_resource type="GDScript" id="GDScript_2p2qv"]
 script/source = "extends AnimationTree
-@export var hover:bool = false
-@export var placed:bool = false
-@export var submitted:bool = false
 @export var is_copy:bool = false
+var placement:int
 "
 
 [sub_resource type="GDScript" id="GDScript_3eav7"]
@@ -771,17 +926,13 @@ var display_letter:bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var current_radius:float = material.get_shader_parameter(\"radius\")
-	#material.set_shader_parameter(.)
 "
 
 [node name="VisualTile" type="TextureButton" unique_id=348209479]
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
 script = ExtResource("1_4ipli")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2112099576]
@@ -836,7 +987,6 @@ horizontal_alignment = 2
 tree_root = SubResource("AnimationNodeStateMachine_1xr65")
 anim_player = NodePath("../AnimationPlayer")
 script = SubResource("GDScript_2p2qv")
-placed = true
 
 [node name="VisualManager" type="Node" parent="." unique_id=1638780769]
 script = SubResource("GDScript_3eav7")
