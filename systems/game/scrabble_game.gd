@@ -1,10 +1,8 @@
 class_name ScrabbleGame
 extends Resource
-#signal hand_changed(new_hand:Array[Tile])
 
 
 var hand:Hand
-#var hand : Array[Tile] = []
 var bag : TileBag
 var board : TileBoard
 var distro : Distribution
