@@ -768,8 +768,17 @@ font_size = 32
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ix5a"]
 animation = &"copy"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5u0ay"]
+animation = &"inactive_hover"
+play_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l0nwh"]
 animation = &"in_hand"
+use_custom_timeline = true
+timeline_length = 0.2
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2p2qv"]
 animation = &"inactive_hover"
@@ -857,10 +866,33 @@ switch_mode = 2
 advance_mode = 2
 advance_expression = "placement == 0"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1ix5a"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 4"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l0nwh"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p24tk"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xadhh"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "placement == 4"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1xr65"]
+states/End/position = Vector2(1379, 93)
 states/Start/position = Vector2(543, -57)
 states/copy/node = SubResource("AnimationNodeAnimation_1ix5a")
 states/copy/position = Vector2(731, -84)
+states/dragging/node = SubResource("AnimationNodeAnimation_5u0ay")
+states/dragging/position = Vector2(1030, 37)
 states/in_hand/node = SubResource("AnimationNodeAnimation_l0nwh")
 states/in_hand/position = Vector2(829, -40)
 states/inactive/node = SubResource("AnimationNodeAnimation_2p2qv")
@@ -869,7 +901,7 @@ states/placed/node = SubResource("AnimationNodeAnimation_1xr65")
 states/placed/position = Vector2(701, 93)
 states/submitted/node = SubResource("AnimationNodeAnimation_fdq3c")
 states/submitted/position = Vector2(543, 159)
-transitions = ["Start", "inactive", SubResource("AnimationNodeStateMachineTransition_5u0ay"), "inactive", "submitted", SubResource("AnimationNodeStateMachineTransition_2p2qv"), "submitted", "inactive", SubResource("AnimationNodeStateMachineTransition_fdq3c"), "inactive", "placed", SubResource("AnimationNodeStateMachineTransition_7vp1w"), "placed", "inactive", SubResource("AnimationNodeStateMachineTransition_odmu4"), "placed", "submitted", SubResource("AnimationNodeStateMachineTransition_3rx8v"), "submitted", "placed", SubResource("AnimationNodeStateMachineTransition_2tef6"), "Start", "copy", SubResource("AnimationNodeStateMachineTransition_ngjwe"), "inactive", "in_hand", SubResource("AnimationNodeStateMachineTransition_2c5of"), "in_hand", "placed", SubResource("AnimationNodeStateMachineTransition_loj2r"), "placed", "in_hand", SubResource("AnimationNodeStateMachineTransition_r6wtu"), "in_hand", "inactive", SubResource("AnimationNodeStateMachineTransition_ta42r")]
+transitions = ["Start", "inactive", SubResource("AnimationNodeStateMachineTransition_5u0ay"), "inactive", "submitted", SubResource("AnimationNodeStateMachineTransition_2p2qv"), "submitted", "inactive", SubResource("AnimationNodeStateMachineTransition_fdq3c"), "inactive", "placed", SubResource("AnimationNodeStateMachineTransition_7vp1w"), "placed", "inactive", SubResource("AnimationNodeStateMachineTransition_odmu4"), "placed", "submitted", SubResource("AnimationNodeStateMachineTransition_3rx8v"), "submitted", "placed", SubResource("AnimationNodeStateMachineTransition_2tef6"), "Start", "copy", SubResource("AnimationNodeStateMachineTransition_ngjwe"), "inactive", "in_hand", SubResource("AnimationNodeStateMachineTransition_2c5of"), "in_hand", "placed", SubResource("AnimationNodeStateMachineTransition_loj2r"), "placed", "in_hand", SubResource("AnimationNodeStateMachineTransition_r6wtu"), "in_hand", "inactive", SubResource("AnimationNodeStateMachineTransition_ta42r"), "in_hand", "dragging", SubResource("AnimationNodeStateMachineTransition_1ix5a"), "dragging", "placed", SubResource("AnimationNodeStateMachineTransition_l0nwh"), "dragging", "in_hand", SubResource("AnimationNodeStateMachineTransition_p24tk"), "placed", "dragging", SubResource("AnimationNodeStateMachineTransition_xadhh")]
 graph_offset = Vector2(66, -142)
 
 [sub_resource type="GDScript" id="GDScript_2p2qv"]

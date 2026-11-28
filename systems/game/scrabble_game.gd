@@ -38,7 +38,6 @@ func player_place_tile(pos:Vector2i, tile:Tile) -> bool: # True if all tiles pas
 			var temp_tile:Tile = temporary_tiles[coord]
 			temp_tile.placement = Tile.Placement.SUBMITTED
 		board.set_tiles(temporary_tiles)
-		hand.remove_bulk(temporary_tiles.values())
 		draw_tiles()
 		
 	return true

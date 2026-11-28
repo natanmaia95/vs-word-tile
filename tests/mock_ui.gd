@@ -12,12 +12,7 @@ func _ready() -> void:
 	player_board.game = game
 	game.board.set_starting_word(game.distro)
 	shuffle_button.pressed.connect(func() -> void:
-		var children:Array[Node] = hand_container.get_children()
-		children.shuffle()
-		for child in children:
-			hand_container.remove_child(child)
-		for child in children:
-			hand_container.add_child(child)
+		game.hand.shuffle()
 	)
 	remove_tiles_button.pressed.connect(func() -> void:
 		var temp_tiles:Dictionary[Vector2i, Tile] = game.board.get_temporary_tiles()

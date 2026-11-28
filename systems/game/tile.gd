@@ -2,7 +2,7 @@ class_name Tile extends Resource
 
 ## Just thinking through this
 
-enum Placement {NULL, IN_HAND, TEMPORARY, SUBMITTED}
+enum Placement {NULL, IN_HAND, TEMPORARY, SUBMITTED, DRAGGING}
 
 @export var letter:String = "":
 	set(new):
