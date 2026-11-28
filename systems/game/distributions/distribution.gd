@@ -9,7 +9,6 @@ class Data extends RefCounted:
 		count = _count
 		points = _points
 
-@warning_ignore("unused_private_class_variable")
 var _data:Array[Distribution.Data]
 
 @export_multiline var word_list : String
@@ -28,7 +27,6 @@ func get_bag() -> TileBag:
 		var tile:Tile = Tile.new()
 		tile.letter = data.letter
 		tile.points = data.points
-		#print("Loaded tile {0}".format([tile]))
 		for i:int in range(data.count):
 			bag.add_tile(tile.duplicate())
 	bag.shuffle()

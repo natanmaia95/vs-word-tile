@@ -1,42 +1,29 @@
 class_name ScrabbleGame
 extends Resource
-signal hand_changed(new_hand:Array[Tile])
+#signal hand_changed(new_hand:Array[Tile])
 
-var hand : Array[Tile] = []
+
+var hand:Hand
+#var hand : Array[Tile] = []
 var bag : TileBag
 var board : TileBoard
 var distro : Distribution
 
 
 func initialize() -> void:
-	distro = OfficialEnglishDistribution.new()
 	board = TileBoard.new()
+	
+	distro = OfficialEnglishDistribution.new()
 	bag = distro.get_bag()
-	draw_hand_tiles()
-	hand_changed.emit(hand)
+	
+	hand = Hand.new()
+	hand.draw_tiles(bag)
 
-func remove_hand_tiles(tiles:Array[Tile]) -> void:
-	for data in tiles:
-		hand.erase(data)
-	hand_changed.emit(hand)
-
-func draw_hand_tiles(hand_size:int = 7) -> void:
-	for i:int in range(hand_size):
-		if hand.size() >= hand_size:
-			break
-		add_hand_tile(bag.get_tile(), true)
-	hand_changed.emit(hand)
-
-func add_hand_tile(tile:Tile, skip_emit:bool = false) -> void:
-	tile.placement = Tile.Placement.IN_HAND
-	print("Drew ", tile)
-	hand.append(tile)
-	if skip_emit:
-		return
-	hand_changed.emit(hand)
-
+func draw_tiles(count:int = hand.max_hand_size) -> void:
+	hand.draw_tiles(bag, count)
 
 func player_place_tile(pos:Vector2i, tile:Tile) -> bool: # True if all tiles pass
+	tile.placement = Tile.Placement.TEMPORARY
 	board.set_tile(pos, tile)
 	var failed_check = false
 	var temporary_tiles = board.get_temporary_tiles()
@@ -51,33 +38,33 @@ func player_place_tile(pos:Vector2i, tile:Tile) -> bool: # True if all tiles pas
 			var temp_tile:Tile = temporary_tiles[coord]
 			temp_tile.placement = Tile.Placement.SUBMITTED
 		board.set_tiles(temporary_tiles)
-		remove_hand_tiles(temporary_tiles.values())
-		draw_hand_tiles()
+		hand.remove_bulk(temporary_tiles.values())
+		draw_tiles()
 		
 	return true
 
-func player_remove_tile(pos:Vector2i) -> void:
-	board.set_tile_data(pos, 0)
+func player_remove_tile(coord:Vector2i) -> void:
+	board.set_tile(coord, null)
 
 func _connected_tiles(from_coord:Vector2i, x_axis:bool) -> Dictionary[Vector2i, Tile]:
 	var tiles:Dictionary[Vector2i, Tile]
 	for i in range(board.size):
 		var coord:Vector2i = from_coord + (Vector2i.RIGHT if x_axis else Vector2i.DOWN) * i
-		var tile:Tile = board.get_tile_at(coord)
-		if tile.is_empty():
+		var tile:Tile = board.get_tile(coord)
+		if not tile or tile.is_empty():
 			break
 		tiles[coord] = tile
 	return tiles
 
 func _earliest_filled_tile(from_coord:Vector2i, x_axis:bool) -> Vector2i:
-	if board.get_tile_at(from_coord).is_empty():
+	if board.get_tile(from_coord).is_empty():
 		printerr("Requested earliest filled tile from an empty coord")
 		return from_coord
 	
 	for i in range(board.size):
 		var coord:Vector2i = from_coord + (Vector2i.LEFT if x_axis else Vector2i.UP) * i
-		var tile:Tile = board.get_tile_at(coord)
-		if tile.is_empty():
+		var tile:Tile = board.get_tile(coord)
+		if not tile or tile.is_empty():
 			return coord + (Vector2i.RIGHT if x_axis else Vector2i.DOWN)
 	return from_coord
 

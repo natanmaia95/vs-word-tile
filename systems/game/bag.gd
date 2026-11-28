@@ -18,6 +18,5 @@ func get_tile() -> Tile:
 	return tile
 
 func add_tile(tile:Tile) -> void:
-	print("Adding tile to bag: {0}".format([tile]))
 	_tiles.append(tile)
 	changed.emit()

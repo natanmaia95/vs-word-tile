@@ -810,7 +810,7 @@ advance_expression = "placement == 3"
 xfade_time = 0.1
 switch_mode = 2
 advance_mode = 2
-advance_expression = "tile.placement == Tile.Placement.NULL"
+advance_expression = "placement == 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7vp1w"]
 switch_mode = 2
@@ -820,18 +820,18 @@ advance_expression = "placement == 2"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_odmu4"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "tile.placement == Tile.Placement.NULL"
+advance_expression = "placement == 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3rx8v"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "tile.placement == Tile.Placement.SUBMITTED"
+advance_expression = "placement == 3"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2tef6"]
 xfade_time = 0.3
 switch_mode = 2
 advance_mode = 2
-advance_expression = "tile.placement == Tile.Placement.TEMPORARY"
+advance_expression = "placement == 2"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ngjwe"]
 advance_mode = 2
@@ -899,6 +899,8 @@ func _ready() -> void:
 [node name="VisualTile" type="TextureButton" unique_id=348209479]
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
 script = ExtResource("1_4ipli")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2112099576]
